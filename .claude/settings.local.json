@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone:*)",
+      "Read(//c/01 Claude-Code//**)",
+      "Read(//c/01 Claude-Code/**)",
+      "Bash(grep:*)"
+    ]
+  }
+}

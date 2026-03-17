@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="n8n AI Super Platform 시스템 아키텍처 — 4개 레이어 구조도 및 기술 스택 다이어그램">
+<meta property="og:title" content="n8n AI Super Platform">
+<meta property="og:description" content="n8n AI Super Platform 시스템 아키텍처 — 4개 레이어 구조도 및 기술 스택 다이어그램">
+<meta property="og:type" content="website">
+<title>아키텍처 구조도 — n8n AI Super Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#050c1a;--bg2:#0b1a30;--bg3:#0f2240;--cyan:#00d4ff;--purple:#7c3aed;--green:#10b981;--orange:#f59e0b;--text:#ffffff;--text2:#ffffff;--muted:#ffffff;--border:rgba(0,212,255,0.6);--card-glow:rgba(0,212,255,0.15);--card-bg-grad:linear-gradient(135deg, #1e5ab5 0%, #2469c8 100%);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden;border-top:4px solid transparent;border-image:linear-gradient(90deg,#00d4ff,#7c3aed,#10b981,#f59e0b) 1;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,10,20,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,212,255,0.28);box-shadow:0 1px 30px rgba(0,0,0,0.5);}
+  .nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:700;color:var(--cyan);text-decoration:none;}
+  .logo span{color:var(--text);}
+  .nav-links{display:flex;gap:1.5rem;list-style:none;}
+  .nav-links a{color:var(--text2);text-decoration:none;font-size:.9rem;transition:color .2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--cyan);}
+  .hero-arch{padding:8rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(124,58,237,.08) 0%,transparent 70%), radial-gradient(ellipse 60% 40% at 50% 80%, rgba(0,212,255,0.06) 0%, transparent 70%);}
+  .hero-arch h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:.75rem;}
+  .hero-arch h1 span{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero-arch p{color:var(--text2);font-size:1rem;}
+  .tabs-wrapper{max-width:1200px;margin:2rem auto 0;padding:0 2rem;}
+  .tabs{display:flex;gap:.5rem;flex-wrap:wrap;border-bottom:2px solid rgba(0,212,255,0.15);padding-bottom:0;}
+  .tab{padding:.75rem 1.25rem;border-radius:8px 8px 0 0;cursor:pointer;font-size:.9rem;color:var(--text2);border:1px solid transparent;border-bottom:none;transition:all .2s;background:transparent;}
+  .tab.active{background:rgba(0,212,255,0.12);color:var(--cyan);border-color:rgba(0,212,255,0.35);box-shadow:0 -2px 0 var(--cyan) inset;}
+  .tab:hover:not(.active){color:var(--text);border-color:rgba(0,212,255,0.15);}
+  .tab-content{display:none;padding:2rem 0;}
+  .tab-content.active{display:block;}
+  .diagram-box{background:linear-gradient(135deg,#1e5ab5 0%,#2469c8 100%);border:2px solid rgba(0,212,255,0.75);border-radius:16px;padding:2rem;overflow-x:auto;box-shadow:0 4px 24px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04);}
+  svg text{font-family:'Noto Sans KR','Space Grotesk',sans-serif;}
+  .legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem;padding:1rem;background:linear-gradient(135deg,#1e5ab5 0%,#2469c8 100%);border:2px solid rgba(0,212,255,0.75);border-radius:12px;}
+  .legend-item{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--text2);}
+  .legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+  .desc-box{background:linear-gradient(135deg,#1e5ab5 0%,#2469c8 100%);border:2px solid rgba(0,212,255,0.75);border-top:4px solid var(--cyan);border-radius:12px;padding:1.5rem;margin-top:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.4);}
+  .desc-box h3{color:var(--cyan);font-size:1rem;margin-bottom:.75rem;text-shadow:0 0 16px rgba(0,212,255,0.3);}
+  .desc-box p{color:var(--text2);font-size:.9rem;line-height:1.7;}
+  footer{background:linear-gradient(180deg, #0d1e3a, #050c1a);border-top:1px solid rgba(0,212,255,0.2);padding:2.5rem 2rem;text-align:center;margin-top:4rem;}
+  .footer-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;}
+  .footer-links a{color:var(--text2);text-decoration:none;font-size:.9rem;transition:color .2s;}
+  .footer-links a:hover{color:var(--cyan);}
+  @media(max-width:640px){.nav-links{display:none;}.tabs{overflow-x:auto;flex-wrap:nowrap;}.tab{white-space:nowrap;font-size:.8rem;}}
+  /* FOCUS VISIBLE — 키보드 접근성 */
+  :focus-visible { outline: 2px solid rgba(0,212,255,0.8); outline-offset: 3px; border-radius: 4px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid rgba(0,212,255,0.8); outline-offset: 3px; }
+  /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.4); border-radius: 3px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⚡ n8n AI <span>Platform</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="architecture.html" class="active">구조도</a></li>
+      <li><a href="manual.html">매뉴얼</a></li>
+      <li><a href="chatbot.html">챗봇</a></li>
+      <li><a href="dashboard.html">대시보드</a></li>
+      <li><a href="agents.html">AI 에이전트</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero-arch">
+  <h1>AI 플랫폼 <span>아키텍처 구조도</span></h1>
+  <p>n8n AI Super Platform의 전체 구조를 시각적으로 확인하세요</p>
+</div>
+
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <div class="tab active" tabindex="0" role="tab" aria-selected="true" onclick="showTab('t1',this)">🏗️ 7계층 플랫폼 구조</div>
+    <div class="tab" tabindex="0" role="tab" aria-selected="false" onclick="showTab('t2',this)">🤝 멀티 에이전트 시스템</div>
+    <div class="tab" tabindex="0" role="tab" aria-selected="false" onclick="showTab('t3',this)">⚙️ n8n 워크플로 예시</div>
+    <div class="tab" tabindex="0" role="tab" aria-selected="false" onclick="showTab('t4',this)">☁️ SaaS 플랫폼 구조</div>
+  </div>
+
+  <!-- TAB 1 -->
+  <div id="t1" class="tab-content active">
+    <div class="diagram-box">
+      <svg viewBox="0 0 900 620" width="100%" style="min-width:600px;">
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M1,1 L7,4 L1,7 Z" fill="#00d4ff" opacity=".7"/>
+          </marker>
+        </defs>
+        <!-- Layer 1: Users -->
+        <rect x="50" y="20" width="800" height="70" rx="12" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.4)" stroke-width="1.5"/>
+        <text x="450" y="48" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">사용자 레이어</text>
+        <text x="450" y="70" text-anchor="middle" fill="#94a3b8" font-size="11">일반 사용자 &nbsp;|&nbsp; 기업 고객 &nbsp;|&nbsp; 교육기관 &nbsp;|&nbsp; 정부/공공기관 &nbsp;|&nbsp; 정치 후보 &nbsp;|&nbsp; 문화기관</text>
+        <!-- Arrow -->
+        <line x1="450" y1="92" x2="450" y2="108" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow)" opacity=".6"/>
+        <!-- Layer 2: Interface -->
+        <rect x="50" y="110" width="800" height="70" rx="12" fill="rgba(124,58,237,.12)" stroke="rgba(124,58,237,.4)" stroke-width="1.5"/>
+        <text x="450" y="138" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">서비스 인터페이스</text>
+        <text x="450" y="160" text-anchor="middle" fill="#94a3b8" font-size="11">웹사이트 &nbsp;|&nbsp; 모바일 앱 &nbsp;|&nbsp; AI 챗봇 &nbsp;|&nbsp; 키오스크 &nbsp;|&nbsp; QR 인터페이스</text>
+        <!-- Arrow -->
+        <line x1="450" y1="182" x2="450" y2="198" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow)" opacity=".6"/>
+        <!-- Layer 3: AI Agents -->
+        <rect x="50" y="200" width="800" height="70" rx="12" fill="rgba(16,185,129,.12)" stroke="rgba(16,185,129,.4)" stroke-width="1.5"/>
+        <text x="450" y="228" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">AI 에이전트 레이어</text>
+        <text x="450" y="250" text-anchor="middle" fill="#94a3b8" font-size="11">AI 도슨트 &nbsp;|&nbsp; AI 세일즈 코치 &nbsp;|&nbsp; AI 교육 플랫폼 &nbsp;|&nbsp; AI 선거 전략가 &nbsp;|&nbsp; AI 상담사</text>
+        <!-- Arrow -->
+        <line x1="450" y1="272" x2="450" y2="288" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow)" opacity=".6"/>
+        <!-- Layer 4: AI Engine -->
+        <rect x="50" y="290" width="800" height="70" rx="12" fill="rgba(245,158,11,.1)" stroke="rgba(245,158,11,.4)" stroke-width="1.5"/>
+        <text x="450" y="318" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">AI 엔진 레이어</text>
+        <text x="450" y="340" text-anchor="middle" fill="#94a3b8" font-size="11">GPT-4o &nbsp;|&nbsp; Claude &nbsp;|&nbsp; Gemini &nbsp;|&nbsp; RAG 시스템 &nbsp;|&nbsp; LangChain &nbsp;|&nbsp; Embedding</text>
+        <!-- Arrow -->
+        <line x1="450" y1="362" x2="450" y2="378" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow)" opacity=".6"/>
+        <!-- Layer 5: Automation -->
+        <rect x="50" y="380" width="800" height="70" rx="12" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.5)" stroke-width="2"/>
+        <text x="450" y="408" text-anchor="middle" fill="#00d4ff" font-size="14" font-weight="700">⚡ n8n 자동화 엔진 (핵심)</text>
+        <text x="450" y="430" text-anchor="middle" fill="#94a3b8" font-size="11">Workflow Automation &nbsp;|&nbsp; API Orchestration &nbsp;|&nbsp; Event Processing &nbsp;|&nbsp; Cron Scheduler</text>
+        <!-- Arrow -->
+        <line x1="450" y1="452" x2="450" y2="468" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow)" opacity=".6"/>
+        <!-- Layer 6: Data -->
+        <rect x="50" y="470" width="800" height="70" rx="12" fill="rgba(99,102,241,.12)" stroke="rgba(99,102,241,.4)" stroke-width="1.5"/>
+        <text x="450" y="498" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">데이터 플랫폼</text>
+        <text x="450" y="520" text-anchor="middle" fill="#94a3b8" font-size="11">Vector DB (Pinecone) &nbsp;|&nbsp; PostgreSQL &nbsp;|&nbsp; Knowledge Graph &nbsp;|&nbsp; Supabase &nbsp;|&nbsp; User DB</text>
+        <!-- Arrow -->
+        <line x1="450" y1="542" x2="450" y2="558" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow)" opacity=".6"/>
+        <!-- Layer 7: Infra -->
+        <rect x="50" y="560" width="800" height="50" rx="12" fill="rgba(51,65,85,.5)" stroke="rgba(100,116,139,.3)" stroke-width="1.5"/>
+        <text x="450" y="583" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">인프라 레이어 &nbsp;|&nbsp; Cloud &nbsp;·&nbsp; API Gateway &nbsp;·&nbsp; 보안 시스템 &nbsp;·&nbsp; 모니터링</text>
+        <text x="450" y="601" text-anchor="middle" fill="#64748b" font-size="10">Vercel · AWS · GCP · Security · Logging</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#00d4ff;"></div>사용자/인터페이스/자동화</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed;"></div>서비스 인터페이스</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div>AI 에이전트</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>AI 엔진</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6366f1;"></div>데이터 플랫폼</div>
+    </div>
+    <div class="desc-box">
+      <h3>📌 핵심 포인트</h3>
+      <p>n8n은 5번째 레이어인 자동화 엔진으로 모든 레이어를 연결하는 신경 시스템 역할을 합니다. AI = 두뇌, 데이터 = 기억, n8n = 신경 시스템의 구조로 대표님의 모든 서비스가 이 플랫폼 위에서 동작합니다.</p>
+    </div>
+  </div>
+
+  <!-- TAB 2 -->
+  <div id="t2" class="tab-content">
+    <div class="diagram-box">
+      <svg viewBox="0 0 900 500" width="100%" style="min-width:600px;">
+        <defs>
+          <marker id="arrow2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M1,1 L7,4 L1,7 Z" fill="#00d4ff" opacity=".8"/>
+          </marker>
+        </defs>
+        <!-- User -->
+        <rect x="350" y="20" width="200" height="50" rx="10" fill="rgba(0,212,255,.15)" stroke="rgba(0,212,255,.5)" stroke-width="1.5"/>
+        <text x="450" y="49" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="700">👤 사용자 질문</text>
+        <line x1="450" y1="72" x2="450" y2="105" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <!-- Coordinator -->
+        <rect x="300" y="110" width="300" height="60" rx="12" fill="rgba(0,212,255,.18)" stroke="rgba(0,212,255,.6)" stroke-width="2"/>
+        <text x="450" y="136" text-anchor="middle" fill="#00d4ff" font-size="14" font-weight="700">🎯 Coordinator Agent</text>
+        <text x="450" y="158" text-anchor="middle" fill="#94a3b8" font-size="11">작업 분배 · 의사결정 · 결과 통합</text>
+        <!-- Arrows to sub-agents -->
+        <line x1="350" y1="172" x2="160" y2="230" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)" opacity=".7"/>
+        <line x1="450" y1="172" x2="450" y2="230" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)" opacity=".7"/>
+        <line x1="550" y1="172" x2="740" y2="230" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)" opacity=".7"/>
+        <!-- Sub-agents -->
+        <rect x="50" y="235" width="220" height="80" rx="12" fill="rgba(16,185,129,.12)" stroke="rgba(16,185,129,.4)" stroke-width="1.5"/>
+        <text x="160" y="265" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">📚 Knowledge Agent</text>
+        <text x="160" y="285" text-anchor="middle" fill="#94a3b8" font-size="11">RAG 검색 · 벡터DB 조회</text>
+        <text x="160" y="303" text-anchor="middle" fill="#94a3b8" font-size="10">문서·유물·정책 데이터 검색</text>
+        <rect x="340" y="235" width="220" height="80" rx="12" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.4)" stroke-width="1.5"/>
+        <text x="450" y="265" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">🔬 Analysis Agent</text>
+        <text x="450" y="285" text-anchor="middle" fill="#94a3b8" font-size="11">데이터 분석 · 패턴 발견</text>
+        <text x="450" y="303" text-anchor="middle" fill="#94a3b8" font-size="10">시장·유권자·학습 분석</text>
+        <rect x="630" y="235" width="220" height="80" rx="12" fill="rgba(124,58,237,.12)" stroke="rgba(124,58,237,.4)" stroke-width="1.5"/>
+        <text x="740" y="265" text-anchor="middle" fill="#a78bfa" font-size="13" font-weight="700">✍️ Content Agent</text>
+        <text x="740" y="285" text-anchor="middle" fill="#94a3b8" font-size="11">콘텐츠 · 리포트 생성</text>
+        <text x="740" y="303" text-anchor="middle" fill="#94a3b8" font-size="10">보고서·요약·제안서 작성</text>
+        <!-- Arrows to Interaction -->
+        <line x1="160" y1="317" x2="350" y2="390" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)" opacity=".7"/>
+        <line x1="450" y1="317" x2="450" y2="390" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)" opacity=".7"/>
+        <line x1="740" y1="317" x2="550" y2="390" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)" opacity=".7"/>
+        <!-- Interaction Agent -->
+        <rect x="300" y="395" width="300" height="55" rx="12" fill="rgba(0,212,255,.15)" stroke="rgba(0,212,255,.5)" stroke-width="1.5"/>
+        <text x="450" y="420" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="700">💬 Interaction Agent</text>
+        <text x="450" y="440" text-anchor="middle" fill="#94a3b8" font-size="11">사용자 대화 · 최종 응답 전달</text>
+        <line x1="450" y1="452" x2="450" y2="475" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <rect x="350" y="478" width="200" height="16" rx="8" fill="rgba(0,212,255,.3)"/>
+        <text x="450" y="490" text-anchor="middle" fill="#f0f5fb" font-size="11" font-weight="700">✅ 사용자 응답</text>
+      </svg>
+    </div>
+    <div class="desc-box">
+      <h3>📌 멀티 에이전트 시스템 특징</h3>
+      <p>하나의 AI가 아니라 여러 전문 AI 에이전트가 팀처럼 협력합니다. Coordinator가 작업을 분배하면 Knowledge·Analysis·Content 에이전트가 병렬로 처리하고 Interaction 에이전트가 최종 응답을 생성합니다.</p>
+    </div>
+  </div>
+
+  <!-- TAB 3 -->
+  <div id="t3" class="tab-content">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:1.5rem;">
+      <!-- Workflow 1 -->
+      <div class="diagram-box">
+        <div style="color:var(--cyan);font-weight:700;margin-bottom:1.25rem;font-size:.95rem;">💬 워크플로 1 — AI 상담 자동화</div>
+        <svg viewBox="0 0 340 230" width="100%">
+          <defs><marker id="a1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#00d4ff" opacity=".8"/></marker></defs>
+          <rect x="10" y="10" width="140" height="40" rx="8" fill="rgba(0,212,255,.15)" stroke="rgba(0,212,255,.4)" stroke-width="1"/>
+          <text x="80" y="33" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">💬 고객 질문 입력</text>
+          <line x1="80" y1="52" x2="80" y2="68" stroke="#00d4ff" stroke-width="1.2" marker-end="url(#a1)"/>
+          <rect x="10" y="70" width="140" height="40" rx="8" fill="rgba(124,58,237,.15)" stroke="rgba(124,58,237,.4)" stroke-width="1"/>
+          <text x="80" y="93" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">🔗 Webhook 수신</text>
+          <line x1="80" y1="112" x2="80" y2="128" stroke="#00d4ff" stroke-width="1.2" marker-end="url(#a1)"/>
+          <rect x="10" y="130" width="140" height="40" rx="8" fill="rgba(16,185,129,.15)" stroke="rgba(16,185,129,.4)" stroke-width="1"/>
+          <text x="80" y="153" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">🤖 AI 분석 · 답변</text>
+          <line x1="80" y1="172" x2="80" y2="188" stroke="#00d4ff" stroke-width="1.2" marker-end="url(#a1)"/>
+          <rect x="10" y="190" width="140" height="36" rx="8" fill="rgba(0,212,255,.1)" stroke="rgba(0,212,255,.3)" stroke-width="1"/>
+          <text x="80" y="211" text-anchor="middle" fill="#94a3b8" font-size="11">💾 CRM 저장 · 📧 이메일</text>
+          <!-- Right side -->
+          <rect x="190" y="10" width="140" height="40" rx="8" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+          <text x="260" y="28" text-anchor="middle" fill="#94a3b8" font-size="10">사용 노드:</text>
+          <text x="260" y="43" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="600">Webhook · AI Agent · Email</text>
+          <rect x="190" y="60" width="140" height="55" rx="8" fill="rgba(16,185,129,.08)" stroke="rgba(16,185,129,.2)" stroke-width="1"/>
+          <text x="260" y="79" text-anchor="middle" fill="#94a3b8" font-size="10">활용 사례:</text>
+          <text x="260" y="95" text-anchor="middle" fill="#10b981" font-size="10">· 치과 AI 상담</text>
+          <text x="260" y="110" text-anchor="middle" fill="#10b981" font-size="10">· 세일즈 상담 분석</text>
+        </svg>
+      </div>
+      <!-- Workflow 2 -->
+      <div class="diagram-box">
+        <div style="color:var(--green);font-weight:700;margin-bottom:1.25rem;font-size:.95rem;">✍️ 워크플로 2 — 콘텐츠 자동 생산</div>
+        <svg viewBox="0 0 340 230" width="100%">
+          <defs><marker id="a2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#10b981" opacity=".8"/></marker></defs>
+          <rect x="10" y="10" width="140" height="40" rx="8" fill="rgba(16,185,129,.15)" stroke="rgba(16,185,129,.4)" stroke-width="1"/>
+          <text x="80" y="33" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">⏰ Cron 스케줄</text>
+          <line x1="80" y1="52" x2="80" y2="68" stroke="#10b981" stroke-width="1.2" marker-end="url(#a2)"/>
+          <rect x="10" y="70" width="140" height="40" rx="8" fill="rgba(16,185,129,.12)" stroke="rgba(16,185,129,.35)" stroke-width="1"/>
+          <text x="80" y="93" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">🌐 뉴스 API 수집</text>
+          <line x1="80" y1="112" x2="80" y2="128" stroke="#10b981" stroke-width="1.2" marker-end="url(#a2)"/>
+          <rect x="10" y="130" width="140" height="40" rx="8" fill="rgba(16,185,129,.15)" stroke="rgba(16,185,129,.4)" stroke-width="1"/>
+          <text x="80" y="153" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">🤖 AI 요약 · 생성</text>
+          <line x1="80" y1="172" x2="80" y2="188" stroke="#10b981" stroke-width="1.2" marker-end="url(#a2)"/>
+          <rect x="10" y="190" width="140" height="36" rx="8" fill="rgba(16,185,129,.08)" stroke="rgba(16,185,129,.25)" stroke-width="1"/>
+          <text x="80" y="211" text-anchor="middle" fill="#94a3b8" font-size="11">📝 블로그 · 📱 SNS 게시</text>
+          <rect x="190" y="10" width="140" height="40" rx="8" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+          <text x="260" y="28" text-anchor="middle" fill="#94a3b8" font-size="10">사용 노드:</text>
+          <text x="260" y="43" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="600">Cron · HTTP · OpenAI · Slack</text>
+          <rect x="190" y="60" width="140" height="55" rx="8" fill="rgba(16,185,129,.08)" stroke="rgba(16,185,129,.2)" stroke-width="1"/>
+          <text x="260" y="79" text-anchor="middle" fill="#94a3b8" font-size="10">활용 사례:</text>
+          <text x="260" y="95" text-anchor="middle" fill="#10b981" font-size="10">· AI 출판 자동화</text>
+          <text x="260" y="110" text-anchor="middle" fill="#10b981" font-size="10">· 뉴스레터 자동 발송</text>
+        </svg>
+      </div>
+      <!-- Workflow 3 -->
+      <div class="diagram-box">
+        <div style="color:var(--purple);font-weight:700;margin-bottom:1.25rem;font-size:.95rem;">💼 워크플로 3 — AI 세일즈 자동화</div>
+        <svg viewBox="0 0 340 230" width="100%">
+          <defs><marker id="a3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a78bfa" opacity=".8"/></marker></defs>
+          <rect x="10" y="10" width="140" height="40" rx="8" fill="rgba(124,58,237,.15)" stroke="rgba(124,58,237,.4)" stroke-width="1"/>
+          <text x="80" y="33" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">🎯 리드 발생</text>
+          <line x1="80" y1="52" x2="80" y2="68" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#a3)"/>
+          <rect x="10" y="70" width="140" height="40" rx="8" fill="rgba(124,58,237,.12)" stroke="rgba(124,58,237,.35)" stroke-width="1"/>
+          <text x="80" y="93" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">🤖 AI 고객 분석</text>
+          <line x1="80" y1="112" x2="80" y2="128" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#a3)"/>
+          <rect x="10" y="130" width="140" height="40" rx="8" fill="rgba(124,58,237,.15)" stroke="rgba(124,58,237,.4)" stroke-width="1"/>
+          <text x="80" y="153" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">📋 제안서 자동 생성</text>
+          <line x1="80" y1="172" x2="80" y2="188" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#a3)"/>
+          <rect x="10" y="190" width="140" height="36" rx="8" fill="rgba(124,58,237,.08)" stroke="rgba(124,58,237,.25)" stroke-width="1"/>
+          <text x="80" y="211" text-anchor="middle" fill="#94a3b8" font-size="11">💾 CRM · 📧 이메일 발송</text>
+          <rect x="190" y="60" width="140" height="70" rx="8" fill="rgba(124,58,237,.08)" stroke="rgba(124,58,237,.2)" stroke-width="1"/>
+          <text x="260" y="80" text-anchor="middle" fill="#94a3b8" font-size="10">SPIN + QLRCQ</text>
+          <text x="260" y="97" text-anchor="middle" fill="#a78bfa" font-size="10">· 고객 유형 자동 분류</text>
+          <text x="260" y="114" text-anchor="middle" fill="#a78bfa" font-size="10">· 상담 전략 생성</text>
+          <text x="260" y="131" text-anchor="middle" fill="#a78bfa" font-size="10">· AI 세일즈 코치 연동</text>
+        </svg>
+      </div>
+      <!-- Workflow 4 -->
+      <div class="diagram-box">
+        <div style="color:var(--orange);font-weight:700;margin-bottom:1.25rem;font-size:.95rem;">🗳️ 워크플로 4 — AI 선거 자동화</div>
+        <svg viewBox="0 0 340 230" width="100%">
+          <defs><marker id="a4" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f59e0b" opacity=".8"/></marker></defs>
+          <rect x="10" y="10" width="140" height="40" rx="8" fill="rgba(245,158,11,.15)" stroke="rgba(245,158,11,.4)" stroke-width="1"/>
+          <text x="80" y="33" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">👥 유권자 질문</text>
+          <line x1="80" y1="52" x2="80" y2="68" stroke="#f59e0b" stroke-width="1.2" marker-end="url(#a4)"/>
+          <rect x="10" y="70" width="140" height="40" rx="8" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.35)" stroke-width="1"/>
+          <text x="80" y="93" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">🤖 AI 질문 분석</text>
+          <line x1="80" y1="112" x2="80" y2="128" stroke="#f59e0b" stroke-width="1.2" marker-end="url(#a4)"/>
+          <rect x="10" y="130" width="140" height="40" rx="8" fill="rgba(245,158,11,.15)" stroke="rgba(245,158,11,.4)" stroke-width="1"/>
+          <text x="80" y="153" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="600">📋 공약 DB 매칭</text>
+          <line x1="80" y1="172" x2="80" y2="188" stroke="#f59e0b" stroke-width="1.2" marker-end="url(#a4)"/>
+          <rect x="10" y="190" width="140" height="36" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.25)" stroke-width="1"/>
+          <text x="80" y="211" text-anchor="middle" fill="#94a3b8" font-size="11">💬 답변 생성 · 📱 문자 발송</text>
+          <rect x="190" y="60" width="140" height="70" rx="8" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+          <text x="260" y="80" text-anchor="middle" fill="#94a3b8" font-size="10">AI 선거 플랫폼:</text>
+          <text x="260" y="97" text-anchor="middle" fill="#f59e0b" font-size="10">· 유권자 데이터 분석</text>
+          <text x="260" y="114" text-anchor="middle" fill="#f59e0b" font-size="10">· 공약 자동 생성</text>
+          <text x="260" y="131" text-anchor="middle" fill="#f59e0b" font-size="10">· 캠페인 메시지 자동화</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4 -->
+  <div id="t4" class="tab-content">
+    <div class="diagram-box">
+      <svg viewBox="0 0 900 500" width="100%" style="min-width:600px;">
+        <defs>
+          <marker id="arrow4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M1,1 L7,4 L1,7 Z" fill="#00d4ff" opacity=".7"/>
+          </marker>
+        </defs>
+        <!-- Users -->
+        <rect x="350" y="15" width="200" height="45" rx="10" fill="rgba(0,212,255,.15)" stroke="rgba(0,212,255,.4)" stroke-width="1.5"/>
+        <text x="450" y="41" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">사용자 (웹 / 모바일)</text>
+        <line x1="450" y1="62" x2="450" y2="82" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow4)"/>
+        <!-- API Gateway -->
+        <rect x="300" y="85" width="300" height="45" rx="10" fill="rgba(124,58,237,.15)" stroke="rgba(124,58,237,.4)" stroke-width="1.5"/>
+        <text x="450" y="111" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">🔌 API Gateway</text>
+        <line x1="450" y1="132" x2="450" y2="152" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow4)"/>
+        <!-- Application Layer -->
+        <rect x="50" y="155" width="800" height="120" rx="12" fill="rgba(16,185,129,.08)" stroke="rgba(16,185,129,.3)" stroke-width="1.5"/>
+        <text x="450" y="180" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">Application Layer</text>
+        <!-- 4 modules -->
+        <rect x="80" y="192" width="160" height="65" rx="8" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.3)" stroke-width="1"/>
+        <text x="160" y="217" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="600">🧠 AI Engine</text>
+        <text x="160" y="234" text-anchor="middle" fill="#94a3b8" font-size="10">GPT · Claude · Gemini</text>
+        <text x="160" y="249" text-anchor="middle" fill="#94a3b8" font-size="10">RAG · Embedding</text>
+        <rect x="270" y="192" width="160" height="65" rx="8" fill="rgba(124,58,237,.12)" stroke="rgba(124,58,237,.3)" stroke-width="1"/>
+        <text x="350" y="217" text-anchor="middle" fill="#a78bfa" font-size="12" font-weight="600">⚡ Workflow</text>
+        <text x="350" y="234" text-anchor="middle" fill="#94a3b8" font-size="10">n8n Automation</text>
+        <text x="350" y="249" text-anchor="middle" fill="#94a3b8" font-size="10">Event Processing</text>
+        <rect x="460" y="192" width="160" height="65" rx="8" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+        <text x="540" y="217" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="600">🗄️ Data Engine</text>
+        <text x="540" y="234" text-anchor="middle" fill="#94a3b8" font-size="10">PostgreSQL · MongoDB</text>
+        <text x="540" y="249" text-anchor="middle" fill="#94a3b8" font-size="10">Vector DB</text>
+        <rect x="650" y="192" width="170" height="65" rx="8" fill="rgba(99,102,241,.12)" stroke="rgba(99,102,241,.3)" stroke-width="1"/>
+        <text x="735" y="217" text-anchor="middle" fill="#818cf8" font-size="12" font-weight="600">🔗 Integration</text>
+        <text x="735" y="234" text-anchor="middle" fill="#94a3b8" font-size="10">Slack · Google Sheets</text>
+        <text x="735" y="249" text-anchor="middle" fill="#94a3b8" font-size="10">Notion · CRM · Email</text>
+        <line x1="450" y1="277" x2="450" y2="297" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow4)"/>
+        <!-- Infra -->
+        <rect x="50" y="300" width="800" height="100" rx="12" fill="rgba(51,65,85,.4)" stroke="rgba(100,116,139,.3)" stroke-width="1.5"/>
+        <text x="450" y="325" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700">Infrastructure Layer</text>
+        <rect x="80" y="335" width="155" height="50" rx="8" fill="rgba(0,212,255,.06)" stroke="rgba(0,212,255,.2)" stroke-width="1"/>
+        <text x="157" y="358" text-anchor="middle" fill="#94a3b8" font-size="11">🔮 Vector DB</text>
+        <text x="157" y="375" text-anchor="middle" fill="#64748b" font-size="10">Pinecone · Chroma</text>
+        <rect x="255" y="335" width="155" height="50" rx="8" fill="rgba(16,185,129,.06)" stroke="rgba(16,185,129,.2)" stroke-width="1"/>
+        <text x="332" y="358" text-anchor="middle" fill="#94a3b8" font-size="11">🗃️ Database</text>
+        <text x="332" y="375" text-anchor="middle" fill="#64748b" font-size="10">PostgreSQL · Supabase</text>
+        <rect x="430" y="335" width="155" height="50" rx="8" fill="rgba(245,158,11,.06)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+        <text x="507" y="358" text-anchor="middle" fill="#94a3b8" font-size="11">📨 Message Queue</text>
+        <text x="507" y="375" text-anchor="middle" fill="#64748b" font-size="10">Redis · RabbitMQ</text>
+        <rect x="605" y="335" width="155" height="50" rx="8" fill="rgba(124,58,237,.06)" stroke="rgba(124,58,237,.2)" stroke-width="1"/>
+        <text x="682" y="358" text-anchor="middle" fill="#94a3b8" font-size="11">📁 Storage</text>
+        <text x="682" y="375" text-anchor="middle" fill="#64748b" font-size="10">S3 · Cloudflare R2</text>
+        <!-- Services -->
+        <line x1="450" y1="402" x2="450" y2="420" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrow4)"/>
+        <rect x="50" y="423" width="800" height="60" rx="12" fill="rgba(0,212,255,.08)" stroke="rgba(0,212,255,.25)" stroke-width="1.5"/>
+        <text x="450" y="448" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="700">SaaS 서비스</text>
+        <text x="450" y="468" text-anchor="middle" fill="#94a3b8" font-size="10">AI 북튜터 &nbsp;|&nbsp; AI 도슨트 &nbsp;|&nbsp; AI 세일즈 &nbsp;|&nbsp; AI 선거 &nbsp;|&nbsp; AI 교육 &nbsp;|&nbsp; AI 문화 플랫폼</text>
+      </svg>
+    </div>
+    <div class="desc-box">
+      <h3>📌 SaaS 수익 모델</h3>
+      <p><strong style="color:var(--cyan)">B2C SaaS</strong>: 개인 구독 (월 $10~$30) — AI 북튜터·AI 학습 코치·AI 글쓰기 코치 &nbsp;|&nbsp; <strong style="color:var(--green)">B2B SaaS</strong>: 기업 구독 (월 $500~$2,000) — AI 세일즈·AI 상담·AI 콘텐츠 플랫폼 &nbsp;|&nbsp; <strong style="color:var(--purple)">B2G SaaS</strong>: 공공 프로젝트 (수천만~수억 원) — AI 문화 도슨트·AI 교육·AI 정책 분석</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">홈</a><a href="architecture.html">구조도</a><a href="manual.html">매뉴얼</a><a href="chatbot.html">챗봇</a><a href="dashboard.html">대시보드</a><a href="agents.html">AI 에이전트</a>
+  </div>
+  <p style="color:var(--text2);font-size:.85rem;">©2025 n8n AI Super Platform ⚡</p>
+</footer>
+
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="n8n AI Super Platform — AI 에이전트, 자동화 엔진, 데이터 플랫폼을 하나로 통합한 차세대 AI 플랫폼">
+<meta property="og:title" content="n8n AI Super Platform">
+<meta property="og:description" content="n8n AI Super Platform — AI 에이전트, 자동화 엔진, 데이터 플랫폼을 하나로 통합한 차세대 AI 플랫폼">
+<meta property="og:type" content="website">
+<title>n8n AI Super Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050c1a;
+    --bg2: #0b1a30;
+    --bg3: #0f2240;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --green: #10b981;
+    --text: #ffffff;
+    --text2: #ffffff;
+    --border: rgba(0,212,255,0.6);
+    --muted: #ffffff;
+    --card-glow: rgba(0,212,255,0.15);
+    --card-bg-grad: linear-gradient(135deg, #1e5ab5 0%, #2469c8 100%);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; overflow-x:hidden; border-top:4px solid transparent; border-image:linear-gradient(90deg,#00d4ff,#7c3aed,#10b981,#f59e0b) 1; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(5,10,20,0.97); backdrop-filter:blur(12px); border-bottom:1px solid rgba(0,212,255,0.25); box-shadow:0 1px 30px rgba(0,0,0,0.5); }
+  .nav-inner { max-width:1280px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .logo { font-family:'Space Grotesk',sans-serif; font-size:1.25rem; font-weight:700; color:var(--cyan); text-decoration:none; }
+  .logo span { color:var(--text); }
+  .nav-links { display:flex; gap:1.5rem; list-style:none; }
+  .nav-links a { color:var(--text2); text-decoration:none; font-size:.9rem; transition:color .2s; }
+  .nav-links a:hover { color:var(--cyan); }
+  .nav-cta { background:var(--cyan); color:#000; padding:.5rem 1.2rem; border-radius:8px; font-weight:700; font-size:.9rem; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.85; }
+
+  /* HERO */
+  .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:8rem 2rem 4rem; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,212,255,.22) 0%, transparent 65%), radial-gradient(ellipse 60% 40% at 50% 80%, rgba(124,58,237,0.14) 0%, transparent 65%); pointer-events:none; }
+  .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; }
+  .hero-badge { display:inline-flex; align-items:center; gap:.5rem; background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.3); border-radius:100px; padding:.4rem 1rem; font-size:.85rem; color:var(--cyan); margin-bottom:1.5rem; animation:fadeInUp .6s both; }
+  .hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(3rem,8vw,6rem); font-weight:700; line-height:1.05; margin-bottom:1rem; animation:fadeInUp .6s .1s both; }
+  .hero h1 .hl { background:linear-gradient(135deg,var(--cyan),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { font-size:clamp(1rem,2.5vw,1.35rem); color:var(--text2); margin-bottom:1rem; animation:fadeInUp .6s .2s both; }
+  .hero-desc { max-width:640px; margin:0 auto 2.5rem; color:var(--text2); font-size:.95rem; line-height:1.8; animation:fadeInUp .6s .3s both; }
+  .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; animation:fadeInUp .6s .4s both; }
+  .btn-primary { background:linear-gradient(135deg,var(--cyan),var(--purple)); color:#fff; padding:.85rem 2rem; border-radius:10px; font-weight:700; text-decoration:none; font-size:1rem; transition:transform .2s, box-shadow .2s; border:1px solid rgba(0,212,255,0.4); box-shadow:0 4px 20px rgba(0,212,255,0.35), 0 2px 8px rgba(0,0,0,0.3); }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,212,255,0.5), 0 4px 12px rgba(0,0,0,0.3); }
+  .btn-secondary { background:rgba(0,212,255,0.07); border:1px solid rgba(0,212,255,0.3); color:#c8ddf0; padding:.85rem 2rem; border-radius:10px; font-weight:500; text-decoration:none; font-size:1rem; transition:background .2s, border-color .2s, box-shadow .2s; }
+  .btn-secondary:hover { background:rgba(0,212,255,0.13); border-color:rgba(0,212,255,0.6); box-shadow:0 0 20px rgba(0,212,255,0.15); }
+
+  /* FLOW DIAGRAM */
+  .flow-mini { max-width:500px; margin:3rem auto 0; animation:fadeInUp .6s .5s both; }
+  .flow-nodes { display:flex; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap; }
+  .flow-node { background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.25); border-radius:8px; padding:.4rem .9rem; font-size:.8rem; color:#b8ccdf; white-space:nowrap; }
+  .flow-arrow { color:var(--cyan); font-size:1.1rem; }
+
+  /* STATS */
+  .stats { padding:5rem 2rem; background:linear-gradient(135deg, #0b1a30 0%, #0d2040 100%); border-top:1px solid rgba(0,212,255,0.2); border-bottom:1px solid rgba(0,212,255,0.2); }
+  .stats-inner { max-width:1000px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; text-align:center; }
+  .stat-card { padding:2rem; border:2px solid rgba(0,212,255,0.75); border-radius:16px; background:linear-gradient(135deg, #1e5ab5 0%, #2469c8 100%); box-shadow:0 4px 25px rgba(0,212,255,0.2), 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04); transition:transform .2s, border-color .2s, box-shadow .2s; }
+  .stat-card:hover { border-color:rgba(0,212,255,0.5); box-shadow:0 8px 35px rgba(0,212,255,0.35), 0 4px 16px rgba(0,0,0,0.4); transform:translateY(-4px); }
+  .stat-card:nth-child(1) { border-top:4px solid var(--cyan); }
+  .stat-card:nth-child(2) { border-top:4px solid var(--purple); }
+  .stat-card:nth-child(3) { border-top:4px solid #10b981; }
+  .stat-card:nth-child(4) { border-top:4px solid #f59e0b; }
+  .stat-num { font-family:'Space Grotesk',sans-serif; font-size:3rem; font-weight:700; color:var(--cyan); text-shadow:0 0 20px rgba(0,212,255,0.4); }
+  .stat-label { color:var(--text2); margin-top:.5rem; font-size:.9rem; }
+
+  /* SECTION */
+  section { padding:5rem 2rem; }
+  .section-inner { max-width:1280px; margin:0 auto; }
+  .section-title { text-align:center; margin-bottom:3rem; }
+  .section-title h2 { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700; margin-bottom:.75rem; background:linear-gradient(135deg, #f0f5fb, var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; padding-bottom:.5rem; border-bottom:2px solid; border-image:linear-gradient(90deg, var(--cyan), var(--purple), transparent) 1; }
+  .section-title p { color:var(--text2); font-size:1rem; max-width:600px; margin:0 auto; line-height:1.7; }
+
+  /* WHAT IS n8n */
+  .n8n-section { background:var(--bg); }
+  .n8n-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+  @media(max-width:768px){ .n8n-grid { grid-template-columns:1fr; gap:2rem; } }
+  .n8n-text h3 { font-family:'Space Grotesk',sans-serif; font-size:1.6rem; font-weight:700; margin-bottom:1rem; }
+  .n8n-text .formula { font-size:1.1rem; color:var(--cyan); font-weight:700; margin-bottom:1.5rem; font-family:'Space Grotesk',sans-serif; }
+  .role-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+  .role-table th, .role-table td { padding:.75rem 1rem; text-align:left; border-bottom:1px solid var(--border); font-size:.9rem; }
+  .role-table th { color:var(--cyan); font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; }
+  .role-table td:last-child { color:var(--text2); }
+  .mini-flow { background:linear-gradient(135deg, #1e5ab5 0%, #2469c8 100%); border:2px solid rgba(0,212,255,0.75); border-radius:16px; padding:2rem; box-shadow:0 4px 25px rgba(0,212,255,0.2), 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04); }
+  .mini-flow:hover { border-color:rgba(0,212,255,0.5); box-shadow:0 8px 35px rgba(0,212,255,0.35), 0 4px 16px rgba(0,0,0,0.4); transform:translateY(-4px); transition:all .2s; }
+  .mini-flow h4 { color:var(--cyan); margin-bottom:1.5rem; font-size:.9rem; text-transform:uppercase; letter-spacing:.1em; }
+  .flow-step { display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem; }
+  .flow-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+  .flow-step-text { font-size:.9rem; color:var(--text2); }
+  .flow-step-arrow { color:var(--cyan); margin-left:auto; font-size:.8rem; }
+
+  /* USE CARDS */
+  .use-section { background:linear-gradient(135deg, #0a0f20 0%, #12183a 100%); border-top:1px solid rgba(124,58,237,0.25); border-bottom:1px solid rgba(124,58,237,0.25); }
+  .use-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.5rem; }
+  .use-card { background:linear-gradient(135deg, #1e5ab5 0%, #2469c8 100%); border:2px solid rgba(0,212,255,0.75); border-radius:16px; padding:1.5rem; transition:transform .2s, border-color .2s, box-shadow .2s; cursor:default; box-shadow:0 4px 25px rgba(0,212,255,0.2), 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04); }
+  .use-card:hover { transform:translateY(-4px); border-color:rgba(0,212,255,0.5); box-shadow:0 8px 35px rgba(0,212,255,0.35), 0 4px 16px rgba(0,0,0,0.4); }
+  .use-card:nth-child(1) { border-top:4px solid var(--cyan); }
+  .use-card:nth-child(2) { border-top:4px solid var(--purple); }
+  .use-card:nth-child(3) { border-top:4px solid #10b981; }
+  .use-card:nth-child(4) { border-top:4px solid #f59e0b; }
+  .use-card:nth-child(5) { border-top:4px solid #ec4899; }
+  .use-card:nth-child(6) { border-top:4px solid #6366f1; }
+  .use-card:nth-child(7) { border-top:4px solid #14b8a6; }
+  .use-card:nth-child(8) { border-top:4px solid #f97316; }
+  .use-card:nth-child(9) { border-top:4px solid var(--cyan); }
+  .use-card:nth-child(10) { border-top:4px solid var(--purple); }
+  .use-icon { font-size:2rem; margin-bottom:1rem; }
+  .use-card h4 { font-size:1rem; font-weight:700; margin-bottom:.5rem; }
+  .use-card p { font-size:.85rem; color:var(--text2); line-height:1.6; }
+
+  /* AGENTS */
+  .agents-section { background:var(--bg); }
+  .agent-scroll { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.5rem; }
+  .agent-card { background:linear-gradient(135deg, #1e5ab5 0%, #2469c8 100%); border:2px solid rgba(0,212,255,0.75); border-radius:16px; padding:1.5rem; transition:transform .2s, border-color .2s, box-shadow .2s; box-shadow:0 4px 25px rgba(0,212,255,0.2), 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04); }
+  .agent-card:hover { transform:translateY(-4px); border-color:rgba(0,212,255,0.5); box-shadow:0 8px 35px rgba(0,212,255,0.35), 0 4px 16px rgba(0,0,0,0.4); }
+  .agent-icon { font-size:2.5rem; margin-bottom:.75rem; }
+  .agent-name { font-weight:700; margin-bottom:.5rem; }
+  .agent-funcs { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.75rem; }
+  .func-tag { background:rgba(0,212,255,.12); border:1px solid rgba(0,212,255,.3); border-radius:100px; padding:.25rem .65rem; font-size:.75rem; color:var(--cyan); box-shadow:0 0 8px rgba(0,212,255,0.08); }
+
+  /* PLATFORM */
+  .platform-section { background:linear-gradient(135deg, #0b1a30 0%, #0d2040 100%); border-top:1px solid rgba(16,185,129,0.2); border-bottom:1px solid rgba(16,185,129,0.2); }
+  .platform-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+  @media(max-width:768px){ .platform-grid { grid-template-columns:1fr; } }
+  .platform-card { background:linear-gradient(135deg, #1e5ab5 0%, #2469c8 100%); border:2px solid rgba(0,212,255,0.75); border-radius:20px; padding:2rem; text-align:center; position:relative; overflow:hidden; box-shadow:0 4px 25px rgba(0,212,255,0.2), 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04); transition:transform .2s, border-color .2s, box-shadow .2s; }
+  .platform-card:hover { border-color:rgba(0,212,255,0.5); box-shadow:0 8px 35px rgba(0,212,255,0.35), 0 4px 16px rgba(0,0,0,0.4); transform:translateY(-4px); }
+  .platform-card::before { content:''; position:absolute; top:-40px; right:-40px; width:120px; height:120px; border-radius:50%; opacity:.1; }
+  .platform-card:nth-child(1)::before { background:var(--cyan); }
+  .platform-card:nth-child(2)::before { background:var(--purple); }
+  .platform-card:nth-child(3)::before { background:var(--green); }
+  .platform-card-icon { font-size:2.5rem; margin-bottom:1rem; }
+  .platform-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:1rem; }
+  .platform-tag { display:inline-block; background:rgba(255,255,255,.05); border-radius:6px; padding:.3rem .7rem; font-size:.8rem; color:var(--text2); margin:.25rem; }
+
+  /* CTA */
+  .cta-section { background:var(--bg); text-align:center; }
+  .cta-box { background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(124,58,237,.08)); border:2px solid rgba(0,212,255,0.6); border-radius:24px; box-shadow:0 4px 40px rgba(0,212,255,0.1); padding:4rem 2rem; max-width:800px; margin:0 auto; }
+  .cta-box h2 { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.5rem,3vw,2.5rem); font-weight:700; margin-bottom:1rem; }
+  .cta-box p { color:var(--text2); margin-bottom:2rem; font-size:1rem; }
+  .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+  /* FOOTER */
+  footer { background:linear-gradient(180deg, #0d1e3a, #050c1a); border-top:2px solid rgba(0,212,255,0.3); padding:2.5rem 2rem; text-align:center; }
+  .footer-links { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem; }
+  .footer-links a { color:var(--text2); text-decoration:none; font-size:.9rem; transition:color .2s; }
+  .footer-links a:hover { color:var(--cyan); }
+  .footer-copy { color:var(--text2); font-size:.85rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .fade-in { opacity:1; transform:translateY(0); transition:opacity .6s, transform .6s; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  /* MOBILE */
+  @media(max-width:640px){
+    .nav-links { display:none; }
+    .stats-inner { grid-template-columns:repeat(2,1fr); }
+  }
+  /* FOCUS VISIBLE — 키보드 접근성 */
+  :focus-visible { outline: 2px solid rgba(0,212,255,0.8); outline-offset: 3px; border-radius: 4px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid rgba(0,212,255,0.8); outline-offset: 3px; }
+  /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.4); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav role="navigation" aria-label="주 네비게이션">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⚡ n8n AI <span>Platform</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="architecture.html">구조도</a></li>
+      <li><a href="manual.html">매뉴얼</a></li>
+      <li><a href="chatbot.html">챗봇</a></li>
+      <li><a href="dashboard.html">대시보드</a></li>
+      <li><a href="agents.html">AI 에이전트</a></li>
+    </ul>
+    <a href="chatbot.html" class="nav-cta" aria-label="챗봇으로 시작하기">시작하기</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div>
+    <div class="hero-badge">⚡ AI + 자동화 + 데이터의 완벽한 융합</div>
+    <h1>AI <span class="hl">Super</span><br>Platform</h1>
+    <p class="hero-sub">n8n으로 만드는 AI 자동화 제국</p>
+    <p class="hero-desc">AI 에이전트 + 자동화 엔진 + 데이터 플랫폼을 하나로 통합한 차세대 AI 플랫폼. 대표님의 모든 사업을 하나의 자동화 OS로 연결합니다.</p>
+    <div class="hero-btns">
+      <a href="chatbot.html" class="btn-primary">🤖 지금 시작하기</a>
+      <a href="architecture.html" class="btn-secondary">🗺️ 구조도 보기</a>
+    </div>
+    <div class="flow-mini">
+      <div class="flow-nodes">
+        <div class="flow-node">💬 고객 질문</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">🤖 AI 분석</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">💾 CRM 저장</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">📧 자동 발송</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats fade-in">
+  <div class="stats-inner">
+    <div class="stat-card">
+      <div class="stat-num" data-target="100">0</div>
+      <div class="stat-label">자동화 워크플로</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-target="20">0</div>
+      <div class="stat-label">AI 에이전트</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-target="50">0</div>
+      <div class="stat-label">SaaS 모델</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-target="10">0</div>
+      <div class="stat-label">서비스 도메인</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT IS n8n -->
+<section class="n8n-section fade-in">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>n8n이란?</h2>
+      <p>nodemation = node + automation. AI와 모든 디지털 서비스를 연결해 자동으로 일을 처리하는 플랫폼</p>
+    </div>
+    <div class="n8n-grid">
+      <div class="n8n-text">
+        <div class="formula">AI (GPT) + n8n (자동화) + DB (데이터) = AI 플랫폼</div>
+        <table class="role-table">
+          <tr><th>역할</th><th>비유</th><th>실제 도구</th></tr>
+          <tr><td>🧠 두뇌</td><td>생각하고 판단</td><td>ChatGPT · Claude · Gemini</td></tr>
+          <tr><td>💾 기억</td><td>데이터 저장</td><td>PostgreSQL · Vector DB</td></tr>
+          <tr><td>💪 팔</td><td>행동 실행</td><td>API · Webhook</td></tr>
+          <tr><td>⚡ 신경</td><td>연결 · 자동화</td><td>n8n Workflow</td></tr>
+        </table>
+      </div>
+      <div class="mini-flow">
+        <h4>🔄 자동화 예시 — AI 상담</h4>
+        <div class="flow-step"><div class="flow-icon" style="background:rgba(0,212,255,.15);">💬</div><span class="flow-step-text">고객이 웹사이트에 질문 입력</span></div>
+        <div class="flow-step"><div class="flow-icon" style="background:rgba(124,58,237,.15);">🔗</div><span class="flow-step-text">n8n Webhook이 질문 수신</span></div>
+        <div class="flow-step"><div class="flow-icon" style="background:rgba(0,212,255,.15);">🤖</div><span class="flow-step-text">AI Agent가 답변 생성</span></div>
+        <div class="flow-step"><div class="flow-icon" style="background:rgba(16,185,129,.15);">💾</div><span class="flow-step-text">CRM에 상담 내용 자동 저장</span></div>
+        <div class="flow-step"><div class="flow-icon" style="background:rgba(245,158,11,.15);">📧</div><span class="flow-step-text">고객에게 자동 이메일 발송</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 USE CASES -->
+<section class="use-section fade-in">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>10가지 활용 분야</h2>
+      <p>n8n으로 만들 수 있는 AI 자동화 시스템</p>
+    </div>
+    <div class="use-grid">
+      <div class="use-card"><div class="use-icon">🤖</div><h4>AI 자동화 플랫폼</h4><p>AI 에이전트를 자동화 워크플로에 연결, 지능형 업무 처리 시스템 구축</p></div>
+      <div class="use-card"><div class="use-icon">🔗</div><h4>서비스 연결 허브</h4><p>Slack · Google Sheets · Notion · CRM을 하나로 연결하는 자동화 허브</p></div>
+      <div class="use-card"><div class="use-icon">🧠</div><h4>AI 에이전트 시스템</h4><p>스스로 웹 검색, 계산, 데이터 조회, API 호출을 수행하는 자율 AI 에이전트</p></div>
+      <div class="use-card"><div class="use-icon">📚</div><h4>RAG 지식 시스템</h4><p>문서 업로드 → 임베딩 → 벡터DB → AI 검색 → 정확한 답변 생성</p></div>
+      <div class="use-card"><div class="use-icon">✍️</div><h4>콘텐츠 자동 생산</h4><p>크론 스케줄 → 뉴스 수집 → AI 요약 → 블로그 업로드 → SNS 자동 게시</p></div>
+      <div class="use-card"><div class="use-icon">📊</div><h4>데이터 파이프라인</h4><p>웹 데이터 수집 → Webhook → AI 분석 → DB 저장 → 대시보드 업데이트</p></div>
+      <div class="use-card"><div class="use-icon">🏭</div><h4>자동 업무 로봇</h4><p>리드 생성 → AI 분석 → 고객 점수화 → 메일 자동 발송 → CRM 저장</p></div>
+      <div class="use-card"><div class="use-icon">☁️</div><h4>AI SaaS 서비스</h4><p>AI SaaS 백엔드 자동화 엔진. 구독·결제·분석·상담 전체 자동화</p></div>
+      <div class="use-card"><div class="use-icon">🚀</div><h4>스타트업 운영 OS</h4><p>고객 가입 → Notion DB → Slack 알림 → CRM 등록 → AI 상담 자동화</p></div>
+      <div class="use-card"><div class="use-icon">🎯</div><h4>대표님 프로젝트 적용</h4><p>AI 세일즈·교육·도슨트·선거 솔루션을 하나의 자동화 플랫폼으로 통합</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI AGENTS SHOWCASE -->
+<section class="agents-section fade-in">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>AI 에이전트 쇼케이스</h2>
+      <p>대표님 사업에 적용 가능한 핵심 AI 에이전트 5종</p>
+    </div>
+    <div class="agent-scroll">
+      <div class="agent-card"><div class="agent-icon">📚</div><div class="agent-name">AI 북튜터</div><p style="font-size:.85rem;color:var(--text2);margin-bottom:.5rem;">독서 분석·질문 생성·맞춤 코칭</p><div class="agent-funcs"><span class="func-tag">독서 분석</span><span class="func-tag">질문 생성</span><span class="func-tag">독서 코칭</span></div></div>
+      <div class="agent-card"><div class="agent-icon">🏛️</div><div class="agent-name">AI 도슨트</div><p style="font-size:.85rem;color:var(--text2);margin-bottom:.5rem;">QR 접속·AI 설명·다국어 음성</p><div class="agent-funcs"><span class="func-tag">유물 해설</span><span class="func-tag">다국어</span><span class="func-tag">스토리텔링</span></div></div>
+      <div class="agent-card"><div class="agent-icon">💼</div><div class="agent-name">AI 세일즈 코치</div><p style="font-size:.85rem;color:var(--text2);margin-bottom:.5rem;">SPIN·QLRCQ 기반 상담 전략</p><div class="agent-funcs"><span class="func-tag">고객 분석</span><span class="func-tag">전략 제안</span><span class="func-tag">제안서 생성</span></div></div>
+      <div class="agent-card"><div class="agent-icon">🗳️</div><div class="agent-name">AI 선거 전략가</div><p style="font-size:.85rem;color:var(--text2);margin-bottom:.5rem;">유권자 분석·공약 생성·캠페인</p><div class="agent-funcs"><span class="func-tag">유권자 분석</span><span class="func-tag">공약 개발</span><span class="func-tag">선거 전략</span></div></div>
+      <div class="agent-card"><div class="agent-icon">🎓</div><div class="agent-name">AI 교육 플랫폼</div><p style="font-size:.85rem;color:var(--text2);margin-bottom:.5rem;">학생 질문·AI 튜터·진단 리포트</p><div class="agent-funcs"><span class="func-tag">학습 분석</span><span class="func-tag">AI 튜터</span><span class="func-tag">리포트 생성</span></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2rem;"><a href="agents.html" class="btn-primary">100개 AI 에이전트 전체 보기 →</a></div>
+  </div>
+</section>
+
+<!-- PLATFORM STRUCTURE -->
+<section class="platform-section fade-in">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>플랫폼 구조</h2>
+      <p>AI Engine + 자동화 엔진 + 데이터 플랫폼의 완벽한 통합</p>
+    </div>
+    <div class="platform-grid">
+      <div class="platform-card">
+        <div class="platform-card-icon">🧠</div>
+        <h3>AI Engine</h3>
+        <p style="color:var(--text2);font-size:.9rem;margin-bottom:1rem;">지능적 판단과 생성을 담당</p>
+        <div><span class="platform-tag">GPT-4o</span><span class="platform-tag">Claude</span><span class="platform-tag">Gemini</span><span class="platform-tag">RAG</span><span class="platform-tag">LangChain</span></div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-icon">⚡</div>
+        <h3>n8n 자동화</h3>
+        <p style="color:var(--text2);font-size:.9rem;margin-bottom:1rem;">모든 서비스를 연결하는 신경 시스템</p>
+        <div><span class="platform-tag">Webhook</span><span class="platform-tag">AI Agent</span><span class="platform-tag">Cron</span><span class="platform-tag">HTTP</span><span class="platform-tag">Slack</span></div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-icon">🗄️</div>
+        <h3>데이터 플랫폼</h3>
+        <p style="color:var(--text2);font-size:.9rem;margin-bottom:1rem;">지식과 데이터를 저장·관리</p>
+        <div><span class="platform-tag">Vector DB</span><span class="platform-tag">PostgreSQL</span><span class="platform-tag">Supabase</span><span class="platform-tag">Knowledge Graph</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section fade-in">
+  <div class="section-inner">
+    <div class="cta-box">
+      <h2>지금 바로 AI 플랫폼을 경험하세요</h2>
+      <p>n8n AI Super Platform으로 대표님의 모든 사업을 자동화하세요.</p>
+      <div class="cta-btns">
+        <a href="chatbot.html" class="btn-primary">💬 AI 챗봇 시작</a>
+        <a href="agents.html" class="btn-secondary">🤖 에이전트 카탈로그</a>
+        <a href="architecture.html" class="btn-secondary">🗺️ 아키텍처 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">홈</a>
+    <a href="architecture.html">구조도</a>
+    <a href="manual.html">매뉴얼</a>
+    <a href="chatbot.html">챗봇</a>
+    <a href="dashboard.html">대시보드</a>
+    <a href="agents.html">AI 에이전트</a>
+  </div>
+  <p class="footer-copy">©2025 n8n AI Super Platform — 대표님 사업 자동화 엔진 ⚡</p>
+</footer>
+
+<script>
+// Counter animation
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  const duration = 2000;
+  const start = performance.now();
+  function update(now) {
+    const t = Math.min((now - start) / duration, 1);
+    el.textContent = Math.floor(t * target);
+    if (t < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(update);
+}
+
+// Intersection Observer for fade-in and counters
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.querySelectorAll('[data-target]').forEach(animateCounter);
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+document.querySelector('.stats').classList.add('fade-in');
+</script>
+</body>
+</html>
