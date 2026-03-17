@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="540" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#FF6D5A"/>
+    </marker>
+    <marker id="arr-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4CAF50"/>
+    </marker>
+    <marker id="arr-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#E74C3C"/>
+    </marker>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1117"/>
+      <stop offset="100%" stop-color="#1A1D2E"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="540" fill="url(#bgG)" rx="16"/>
+  <rect x="1" y="1" width="798" height="538" fill="none" stroke="#FF6D5A" stroke-width="1.5" stroke-opacity="0.5" rx="16"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="78" fill="#FF6D5A" fill-opacity="0.12" rx="16"/>
+  <rect x="0" y="62" width="800" height="16" fill="#FF6D5A" fill-opacity="0.05"/>
+  <rect x="20" y="18" width="42" height="42" fill="#FF6D5A" fill-opacity="0.25" rx="8"/>
+  <text x="41" y="46" text-anchor="middle" font-size="20" fill="#FF6D5A" font-weight="bold">①</text>
+  <text x="420" y="38" text-anchor="middle" font-size="21" font-weight="bold" fill="#FF6D5A">Workflow Automation</text>
+  <text x="420" y="60" text-anchor="middle" font-size="12" fill="#888">노드 기반 시각적 자동화 흐름 설계 · Node-Based Visual Automation</text>
+
+  <!-- Section: Main Flow -->
+  <text x="28" y="104" font-size="11" fill="#666" font-weight="bold">▶ MAIN FLOW</text>
+
+  <!-- Node 1: Trigger -->
+  <rect x="22" y="115" width="108" height="72" fill="#FF6D5A" fill-opacity="0.15" stroke="#FF6D5A" stroke-width="2" rx="10" filter="url(#glow)"/>
+  <text x="76" y="144" text-anchor="middle" font-size="24" fill="#FF6D5A">⚡</text>
+  <text x="76" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#FF6D5A">Trigger</text>
+  <text x="76" y="179" text-anchor="middle" font-size="10" fill="#888">Webhook / 수동</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="132" y1="151" x2="158" y2="151" stroke="#FF6D5A" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="145" y="145" text-anchor="middle" font-size="9" fill="#666">JSON</text>
+
+  <!-- Node 2: IF Filter -->
+  <rect x="160" y="115" width="108" height="72" fill="#F5A623" fill-opacity="0.15" stroke="#F5A623" stroke-width="2" rx="10"/>
+  <text x="214" y="144" text-anchor="middle" font-size="24" fill="#F5A623">🔀</text>
+  <text x="214" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#F5A623">IF / Filter</text>
+  <text x="214" y="179" text-anchor="middle" font-size="10" fill="#888">조건 분기</text>
+
+  <!-- Arrow True →3 -->
+  <line x1="270" y1="145" x2="296" y2="145" stroke="#4CAF50" stroke-width="2" marker-end="url(#arr-g)"/>
+  <text x="283" y="138" text-anchor="middle" font-size="9" fill="#4CAF50">True</text>
+
+  <!-- Branch False path down -->
+  <line x1="214" y1="187" x2="214" y2="225" stroke="#E74C3C" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
+  <text x="230" y="213" font-size="9" fill="#E74C3C">False</text>
+  <rect x="154" y="227" width="120" height="38" fill="#E74C3C" fill-opacity="0.1" stroke="#E74C3C" stroke-width="1" rx="7"/>
+  <text x="214" y="244" text-anchor="middle" font-size="11" fill="#E74C3C">⛔ 중단 / Skip</text>
+  <text x="214" y="258" text-anchor="middle" font-size="10" fill="#888">처리 없이 종료</text>
+
+  <!-- Node 3: Transform -->
+  <rect x="298" y="115" width="108" height="72" fill="#4A9EFF" fill-opacity="0.15" stroke="#4A9EFF" stroke-width="2" rx="10"/>
+  <text x="352" y="144" text-anchor="middle" font-size="24" fill="#4A9EFF">🔄</text>
+  <text x="352" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#4A9EFF">Transform</text>
+  <text x="352" y="179" text-anchor="middle" font-size="10" fill="#888">데이터 가공</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="408" y1="151" x2="434" y2="151" stroke="#4A9EFF" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Node 4: Action -->
+  <rect x="436" y="115" width="108" height="72" fill="#36B37E" fill-opacity="0.15" stroke="#36B37E" stroke-width="2" rx="10"/>
+  <text x="490" y="144" text-anchor="middle" font-size="24" fill="#36B37E">🚀</text>
+  <text x="490" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#36B37E">Action</text>
+  <text x="490" y="179" text-anchor="middle" font-size="10" fill="#888">API 호출 / 전송</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="546" y1="151" x2="572" y2="151" stroke="#36B37E" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Node 5: Complete -->
+  <rect x="574" y="115" width="108" height="72" fill="#9B59B6" fill-opacity="0.15" stroke="#9B59B6" stroke-width="2" rx="10"/>
+  <text x="628" y="144" text-anchor="middle" font-size="24" fill="#9B59B6">✅</text>
+  <text x="628" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#9B59B6">Complete</text>
+  <text x="628" y="179" text-anchor="middle" font-size="10" fill="#888">완료 / 로그</text>
+
+  <!-- Error arc 4→5 retry -->
+  <path d="M490 187 Q490 230 628 230 L628 189" stroke="#E74C3C" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr-red)"/>
+  <text x="560" y="244" text-anchor="middle" font-size="9" fill="#E74C3C">오류 발생 시 재시도</text>
+
+  <!-- Divider -->
+  <line x1="22" y1="290" x2="768" y2="290" stroke="#2A2D3E" stroke-width="1.5"/>
+  <text x="28" y="310" font-size="11" fill="#666" font-weight="bold">▶ 핵심 노드 유형</text>
+
+  <!-- Feature Boxes -->
+  <!-- Box 1 -->
+  <rect x="22" y="320" width="170" height="78" fill="#1A1D2E" stroke="#FF6D5A" stroke-width="1" stroke-opacity="0.5" rx="8"/>
+  <text x="107" y="344" text-anchor="middle" font-size="16" fill="#FF6D5A">📥</text>
+  <text x="107" y="362" text-anchor="middle" font-size="11" font-weight="bold" fill="#ddd">Input / Trigger</text>
+  <text x="107" y="378" text-anchor="middle" font-size="10" fill="#888">Webhook · Form · Email</text>
+  <text x="107" y="392" text-anchor="middle" font-size="10" fill="#888">Cron · Manual Start</text>
+
+  <!-- Box 2 -->
+  <rect x="204" y="320" width="170" height="78" fill="#1A1D2E" stroke="#F5A623" stroke-width="1" stroke-opacity="0.5" rx="8"/>
+  <text x="289" y="344" text-anchor="middle" font-size="16" fill="#F5A623">🧠</text>
+  <text x="289" y="362" text-anchor="middle" font-size="11" font-weight="bold" fill="#ddd">Logic / Control</text>
+  <text x="289" y="378" text-anchor="middle" font-size="10" fill="#888">IF · Switch · Loop</text>
+  <text x="289" y="392" text-anchor="middle" font-size="10" fill="#888">Merge · Split · Wait</text>
+
+  <!-- Box 3 -->
+  <rect x="386" y="320" width="170" height="78" fill="#1A1D2E" stroke="#4A9EFF" stroke-width="1" stroke-opacity="0.5" rx="8"/>
+  <text x="471" y="344" text-anchor="middle" font-size="16" fill="#4A9EFF">⚙️</text>
+  <text x="471" y="362" text-anchor="middle" font-size="11" font-weight="bold" fill="#ddd">Process / Transform</text>
+  <text x="471" y="378" text-anchor="middle" font-size="10" fill="#888">Set · Function · Code</text>
+  <text x="471" y="392" text-anchor="middle" font-size="10" fill="#888">Aggregate · Sort · Filter</text>
+
+  <!-- Box 4 -->
+  <rect x="568" y="320" width="170" height="78" fill="#1A1D2E" stroke="#36B37E" stroke-width="1" stroke-opacity="0.5" rx="8"/>
+  <text x="653" y="344" text-anchor="middle" font-size="16" fill="#36B37E">📤</text>
+  <text x="653" y="362" text-anchor="middle" font-size="11" font-weight="bold" fill="#ddd">Output / Action</text>
+  <text x="653" y="378" text-anchor="middle" font-size="10" fill="#888">HTTP · Slack · Gmail</text>
+  <text x="653" y="392" text-anchor="middle" font-size="10" fill="#888">DB · File · Webhook</text>
+
+  <!-- Example flow at bottom -->
+  <rect x="22" y="415" width="742" height="104" fill="#1A1D2E" rx="10"/>
+  <text x="40" y="436" font-size="11" fill="#aaa" font-weight="bold">실제 예시 시나리오</text>
+
+  <!-- Mini flow -->
+  <rect x="40" y="447" width="82" height="28" fill="#FF6D5A" fill-opacity="0.2" stroke="#FF6D5A" stroke-width="1" rx="5"/>
+  <text x="81" y="465" text-anchor="middle" font-size="10" fill="#FF6D5A">📋 폼 제출</text>
+  <line x1="124" y1="461" x2="140" y2="461" stroke="#555" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+
+  <rect x="142" y="447" width="90" height="28" fill="#F5A623" fill-opacity="0.2" stroke="#F5A623" stroke-width="1" rx="5"/>
+  <text x="187" y="465" text-anchor="middle" font-size="10" fill="#F5A623">🔍 데이터 검증</text>
+  <line x1="234" y1="461" x2="250" y2="461" stroke="#555" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+
+  <rect x="252" y="447" width="82" height="28" fill="#4A9EFF" fill-opacity="0.2" stroke="#4A9EFF" stroke-width="1" rx="5"/>
+  <text x="293" y="465" text-anchor="middle" font-size="10" fill="#4A9EFF">💾 DB 저장</text>
+  <line x1="336" y1="461" x2="352" y2="461" stroke="#555" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+
+  <rect x="354" y="447" width="92" height="28" fill="#36B37E" fill-opacity="0.2" stroke="#36B37E" stroke-width="1" rx="5"/>
+  <text x="400" y="465" text-anchor="middle" font-size="10" fill="#36B37E">📧 이메일 발송</text>
+  <line x1="448" y1="461" x2="464" y2="461" stroke="#555" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+
+  <rect x="466" y="447" width="88" height="28" fill="#9B59B6" fill-opacity="0.2" stroke="#9B59B6" stroke-width="1" rx="5"/>
+  <text x="510" y="465" text-anchor="middle" font-size="10" fill="#9B59B6">💬 슬랙 알림</text>
+  <line x1="556" y1="461" x2="572" y2="461" stroke="#555" stroke-width="1.5" marker-end="url(#arr-gray)"/>
+
+  <rect x="574" y="447" width="82" height="28" fill="#E67E22" fill-opacity="0.2" stroke="#E67E22" stroke-width="1" rx="5"/>
+  <text x="615" y="465" text-anchor="middle" font-size="10" fill="#E67E22">📊 로그 저장</text>
+
+  <text x="40" y="495" font-size="10" fill="#666">① 폼 수신 → ② 유효성 검사(실패 시 오류 메일) → ③ DB 저장 → ④ 확인 이메일 → ⑤ 팀 알림 → ⑥ 감사 로그</text>
+  <text x="40" y="511" font-size="10" fill="#555">※ n8n 캔버스에서 드래그&amp;드롭으로 노드를 연결해 전체 흐름 시각적으로 설계</text>
+</svg>

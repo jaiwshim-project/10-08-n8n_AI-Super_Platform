@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="540" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9B59B6"/>
+    </marker>
+    <marker id="arr-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1117"/>
+      <stop offset="100%" stop-color="#160D20"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="540" fill="url(#bgG)" rx="16"/>
+  <rect x="1" y="1" width="798" height="538" fill="none" stroke="#9B59B6" stroke-width="1.5" stroke-opacity="0.5" rx="16"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="78" fill="#9B59B6" fill-opacity="0.12" rx="16"/>
+  <rect x="0" y="62" width="800" height="16" fill="#9B59B6" fill-opacity="0.05"/>
+  <rect x="20" y="18" width="42" height="42" fill="#9B59B6" fill-opacity="0.25" rx="8"/>
+  <text x="41" y="46" text-anchor="middle" font-size="20" fill="#9B59B6" font-weight="bold">④</text>
+  <text x="420" y="38" text-anchor="middle" font-size="21" font-weight="bold" fill="#9B59B6">Cron Scheduler</text>
+  <text x="420" y="60" text-anchor="middle" font-size="12" fill="#888">정해진 시간·주기에 자동 실행 · Time-Based Automated Execution</text>
+
+  <!-- Clock SVG (left side) -->
+  <circle cx="90" cy="195" r="68" fill="#9B59B6" fill-opacity="0.08" stroke="#9B59B6" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="90" cy="195" r="58" fill="none" stroke="#9B59B6" stroke-width="1" stroke-opacity="0.3"/>
+  <!-- Clock tick marks -->
+  <line x1="90" y1="133" x2="90" y2="143" stroke="#9B59B6" stroke-width="2"/>
+  <line x1="152" y1="195" x2="142" y2="195" stroke="#9B59B6" stroke-width="2"/>
+  <line x1="90" y1="257" x2="90" y2="247" stroke="#9B59B6" stroke-width="2"/>
+  <line x1="28" y1="195" x2="38" y2="195" stroke="#9B59B6" stroke-width="2"/>
+  <!-- Minor ticks -->
+  <line x1="121" y1="141" x2="117" y2="150" stroke="#9B59B6" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="148" y1="164" x2="139" y2="169" stroke="#9B59B6" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="59" y1="141" x2="63" y2="150" stroke="#9B59B6" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="32" y1="164" x2="41" y2="169" stroke="#9B59B6" stroke-width="1" stroke-opacity="0.5"/>
+  <!-- Hour numbers -->
+  <text x="90" y="150" text-anchor="middle" font-size="10" fill="#9B59B6">12</text>
+  <text x="145" y="199" text-anchor="middle" font-size="10" fill="#9B59B6">3</text>
+  <text x="90" y="252" text-anchor="middle" font-size="10" fill="#9B59B6">6</text>
+  <text x="37" y="199" text-anchor="middle" font-size="10" fill="#9B59B6">9</text>
+  <!-- Clock hands -->
+  <line x1="90" y1="195" x2="90" y2="155" stroke="#9B59B6" stroke-width="3" stroke-linecap="round"/>
+  <line x1="90" y1="195" x2="118" y2="195" stroke="#9B59B6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="90" y1="195" x2="78" y2="218" stroke="#E74C3C" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="90" cy="195" r="4" fill="#9B59B6"/>
+  <text x="90" y="278" text-anchor="middle" font-size="11" fill="#9B59B6">Scheduler</text>
+
+  <!-- Cron Expression Section -->
+  <text x="190" y="104" font-size="11" fill="#666" font-weight="bold">▶ CRON EXPRESSION 구조</text>
+
+  <rect x="190" y="112" width="575" height="50" fill="#1A1D2E" stroke="#9B59B6" stroke-width="1" stroke-opacity="0.4" rx="8"/>
+  <!-- Expression display -->
+  <text x="270" y="143" text-anchor="middle" font-size="22" font-weight="bold" fill="#9B59B6" font-family="'Courier New', monospace">*</text>
+  <text x="330" y="143" text-anchor="middle" font-size="22" font-weight="bold" fill="#F5A623" font-family="'Courier New', monospace">*</text>
+  <text x="390" y="143" text-anchor="middle" font-size="22" font-weight="bold" fill="#4A9EFF" font-family="'Courier New', monospace">*</text>
+  <text x="450" y="143" text-anchor="middle" font-size="22" font-weight="bold" fill="#36B37E" font-family="'Courier New', monospace">*</text>
+  <text x="510" y="143" text-anchor="middle" font-size="22" font-weight="bold" fill="#FF6D5A" font-family="'Courier New', monospace">*</text>
+  <text x="560" y="143" text-anchor="middle" font-size="13" fill="#666" font-family="'Courier New', monospace">(6 fields)</text>
+  <!-- Field labels below -->
+  <text x="270" y="127" text-anchor="middle" font-size="9" fill="#9B59B6">분</text>
+  <text x="330" y="127" text-anchor="middle" font-size="9" fill="#F5A623">시</text>
+  <text x="390" y="127" text-anchor="middle" font-size="9" fill="#4A9EFF">일</text>
+  <text x="450" y="127" text-anchor="middle" font-size="9" fill="#36B37E">월</text>
+  <text x="510" y="127" text-anchor="middle" font-size="9" fill="#FF6D5A">요일</text>
+
+  <!-- Field detail boxes -->
+  <rect x="190" y="170" width="105" height="54" fill="#1A1D2E" stroke="#9B59B6" stroke-opacity="0.4" stroke-width="1" rx="6"/>
+  <text x="243" y="189" text-anchor="middle" font-size="10" fill="#9B59B6" font-weight="bold">분 (0-59)</text>
+  <text x="243" y="204" text-anchor="middle" font-size="10" fill="#888">*/5 → 5분마다</text>
+  <text x="243" y="218" text-anchor="middle" font-size="10" fill="#888">30 → 30분에</text>
+
+  <rect x="303" y="170" width="105" height="54" fill="#1A1D2E" stroke="#F5A623" stroke-opacity="0.4" stroke-width="1" rx="6"/>
+  <text x="356" y="189" text-anchor="middle" font-size="10" fill="#F5A623" font-weight="bold">시 (0-23)</text>
+  <text x="356" y="204" text-anchor="middle" font-size="10" fill="#888">9 → 오전 9시</text>
+  <text x="356" y="218" text-anchor="middle" font-size="10" fill="#888">*/2 → 2시간마다</text>
+
+  <rect x="416" y="170" width="105" height="54" fill="#1A1D2E" stroke="#4A9EFF" stroke-opacity="0.4" stroke-width="1" rx="6"/>
+  <text x="469" y="189" text-anchor="middle" font-size="10" fill="#4A9EFF" font-weight="bold">일 (1-31)</text>
+  <text x="469" y="204" text-anchor="middle" font-size="10" fill="#888">1 → 매월 1일</text>
+  <text x="469" y="218" text-anchor="middle" font-size="10" fill="#888">* → 매일</text>
+
+  <rect x="529" y="170" width="105" height="54" fill="#1A1D2E" stroke="#36B37E" stroke-opacity="0.4" stroke-width="1" rx="6"/>
+  <text x="582" y="189" text-anchor="middle" font-size="10" fill="#36B37E" font-weight="bold">요일 (0-6)</text>
+  <text x="582" y="204" text-anchor="middle" font-size="10" fill="#888">1-5 → 평일</text>
+  <text x="582" y="218" text-anchor="middle" font-size="10" fill="#888">0,6 → 주말</text>
+
+  <!-- Schedule Examples -->
+  <text x="28" y="254" font-size="11" fill="#666" font-weight="bold">▶ 스케줄 예시</text>
+
+  <!-- Example Table -->
+  <rect x="22" y="262" width="745" height="24" fill="#9B59B6" fill-opacity="0.2" rx="4"/>
+  <text x="130" y="279" text-anchor="middle" font-size="10" fill="#9B59B6" font-weight="bold">Cron 표현식</text>
+  <text x="330" y="279" text-anchor="middle" font-size="10" fill="#9B59B6" font-weight="bold">실행 시점</text>
+  <text x="520" y="279" text-anchor="middle" font-size="10" fill="#9B59B6" font-weight="bold">사용 예시</text>
+
+  <!-- Row 1 -->
+  <rect x="22" y="286" width="745" height="26" fill="#1A1D2E" rx="0"/>
+  <text x="130" y="303" text-anchor="middle" font-size="11" fill="#4CAF50" font-family="'Courier New', monospace">0 9 * * 1-5</text>
+  <text x="330" y="303" text-anchor="middle" font-size="10" fill="#ddd">평일(월~금) 오전 9시</text>
+  <text x="520" y="303" text-anchor="middle" font-size="10" fill="#888">📊 일일 업무 리포트 생성</text>
+
+  <!-- Row 2 -->
+  <rect x="22" y="312" width="745" height="26" fill="#141820" rx="0"/>
+  <text x="130" y="329" text-anchor="middle" font-size="11" fill="#4CAF50" font-family="'Courier New', monospace">0 0 * * *</text>
+  <text x="330" y="329" text-anchor="middle" font-size="10" fill="#ddd">매일 자정 (00:00)</text>
+  <text x="520" y="329" text-anchor="middle" font-size="10" fill="#888">🗄️ DB 백업 · 캐시 초기화</text>
+
+  <!-- Row 3 -->
+  <rect x="22" y="338" width="745" height="26" fill="#1A1D2E" rx="0"/>
+  <text x="130" y="355" text-anchor="middle" font-size="11" fill="#4CAF50" font-family="'Courier New', monospace">*/30 * * * *</text>
+  <text x="330" y="355" text-anchor="middle" font-size="10" fill="#ddd">30분마다</text>
+  <text x="520" y="355" text-anchor="middle" font-size="10" fill="#888">🔄 데이터 동기화 · 상태 체크</text>
+
+  <!-- Row 4 -->
+  <rect x="22" y="364" width="745" height="26" fill="#141820" rx="0"/>
+  <text x="130" y="381" text-anchor="middle" font-size="11" fill="#4CAF50" font-family="'Courier New', monospace">0 9 1 * *</text>
+  <text x="330" y="381" text-anchor="middle" font-size="10" fill="#ddd">매월 1일 오전 9시</text>
+  <text x="520" y="381" text-anchor="middle" font-size="10" fill="#888">📈 월간 통계 리포트</text>
+
+  <!-- Row 5 -->
+  <rect x="22" y="390" width="745" height="26" fill="#1A1D2E" rx="0"/>
+  <text x="130" y="407" text-anchor="middle" font-size="11" fill="#4CAF50" font-family="'Courier New', monospace">0 8,18 * * *</text>
+  <text x="330" y="407" text-anchor="middle" font-size="10" fill="#ddd">매일 오전 8시, 오후 6시</text>
+  <text x="520" y="407" text-anchor="middle" font-size="10" fill="#888">📧 뉴스레터 · 알림 발송</text>
+
+  <!-- Execution Flow -->
+  <text x="28" y="444" font-size="11" fill="#666" font-weight="bold">▶ 실행 흐름</text>
+
+  <!-- Flow steps -->
+  <rect x="22" y="452" width="130" height="70" fill="#9B59B6" fill-opacity="0.15" stroke="#9B59B6" stroke-width="1.8" rx="10"/>
+  <text x="87" y="477" text-anchor="middle" font-size="20" fill="#9B59B6">🕘</text>
+  <text x="87" y="496" text-anchor="middle" font-size="11" font-weight="bold" fill="#9B59B6">Schedule</text>
+  <text x="87" y="512" text-anchor="middle" font-size="9" fill="#888">크론 시간 도달</text>
+
+  <line x1="154" y1="487" x2="180" y2="487" stroke="#9B59B6" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="182" y="452" width="130" height="70" fill="#FF6D5A" fill-opacity="0.15" stroke="#FF6D5A" stroke-width="1.8" rx="10"/>
+  <text x="247" y="477" text-anchor="middle" font-size="20" fill="#FF6D5A">⚡</text>
+  <text x="247" y="496" text-anchor="middle" font-size="11" font-weight="bold" fill="#FF6D5A">Trigger</text>
+  <text x="247" y="512" text-anchor="middle" font-size="9" fill="#888">워크플로우 시작</text>
+
+  <line x1="314" y1="487" x2="340" y2="487" stroke="#9B59B6" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="342" y="452" width="130" height="70" fill="#4A9EFF" fill-opacity="0.15" stroke="#4A9EFF" stroke-width="1.8" rx="10"/>
+  <text x="407" y="477" text-anchor="middle" font-size="20" fill="#4A9EFF">⚙️</text>
+  <text x="407" y="496" text-anchor="middle" font-size="11" font-weight="bold" fill="#4A9EFF">Execute</text>
+  <text x="407" y="512" text-anchor="middle" font-size="9" fill="#888">노드 순차 실행</text>
+
+  <line x1="474" y1="487" x2="500" y2="487" stroke="#9B59B6" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="502" y="452" width="130" height="70" fill="#36B37E" fill-opacity="0.15" stroke="#36B37E" stroke-width="1.8" rx="10"/>
+  <text x="567" y="477" text-anchor="middle" font-size="20" fill="#36B37E">✅</text>
+  <text x="567" y="496" text-anchor="middle" font-size="11" font-weight="bold" fill="#36B37E">Complete</text>
+  <text x="567" y="512" text-anchor="middle" font-size="9" fill="#888">완료 · 결과 저장</text>
+
+  <line x1="634" y1="487" x2="660" y2="487" stroke="#9B59B6" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="662" y="452" width="100" height="70" fill="#F39C12" fill-opacity="0.15" stroke="#F39C12" stroke-width="1.8" rx="10"/>
+  <text x="712" y="477" text-anchor="middle" font-size="20" fill="#F39C12">📋</text>
+  <text x="712" y="496" text-anchor="middle" font-size="11" font-weight="bold" fill="#F39C12">Log</text>
+  <text x="712" y="512" text-anchor="middle" font-size="9" fill="#888">실행 기록</text>
+</svg>

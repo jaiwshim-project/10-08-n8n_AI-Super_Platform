@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="540" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4A9EFF"/>
+    </marker>
+    <marker id="arr-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#E74C3C"/>
+    </marker>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1117"/>
+      <stop offset="100%" stop-color="#101828"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="540" fill="url(#bgG)" rx="16"/>
+  <rect x="1" y="1" width="798" height="538" fill="none" stroke="#4A9EFF" stroke-width="1.5" stroke-opacity="0.5" rx="16"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="78" fill="#4A9EFF" fill-opacity="0.12" rx="16"/>
+  <rect x="0" y="62" width="800" height="16" fill="#4A9EFF" fill-opacity="0.05"/>
+  <rect x="20" y="18" width="42" height="42" fill="#4A9EFF" fill-opacity="0.25" rx="8"/>
+  <text x="41" y="46" text-anchor="middle" font-size="20" fill="#4A9EFF" font-weight="bold">②</text>
+  <text x="420" y="38" text-anchor="middle" font-size="21" font-weight="bold" fill="#4A9EFF">API Orchestration</text>
+  <text x="420" y="60" text-anchor="middle" font-size="12" fill="#888">다중 외부 API를 하나의 워크플로우로 조율 · Multi-API Coordination</text>
+
+  <!-- Section label -->
+  <text x="28" y="104" font-size="11" fill="#666" font-weight="bold">▶ ORCHESTRATION FLOW</text>
+
+  <!-- INPUT NODE -->
+  <rect x="22" y="115" width="110" height="130" fill="#4A9EFF" fill-opacity="0.15" stroke="#4A9EFF" stroke-width="2" rx="12" filter="url(#glow)"/>
+  <text x="77" y="148" text-anchor="middle" font-size="22" fill="#4A9EFF">📥</text>
+  <text x="77" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#4A9EFF">Input</text>
+  <text x="77" y="188" text-anchor="middle" font-size="10" fill="#888">고객 ID</text>
+  <text x="77" y="204" text-anchor="middle" font-size="10" fill="#888">요청 데이터</text>
+  <rect x="34" y="212" width="82" height="20" fill="#4A9EFF" fill-opacity="0.2" rx="4"/>
+  <text x="75" y="226" text-anchor="middle" font-size="9" fill="#aaa">{ id: 1234 }</text>
+
+  <!-- Fan-out arrows to 3 APIs -->
+  <!-- Top API -->
+  <line x1="134" y1="140" x2="216" y2="140" stroke="#4A9EFF" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- Mid API -->
+  <line x1="134" y1="180" x2="216" y2="196" stroke="#4A9EFF" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- Bottom API -->
+  <line x1="134" y1="220" x2="216" y2="252" stroke="#4A9EFF" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Parallel bracket left -->
+  <line x1="200" y1="118" x2="200" y2="278" stroke="#4A9EFF" stroke-width="2" stroke-opacity="0.3"/>
+  <text x="185" y="202" text-anchor="middle" font-size="9" fill="#4A9EFF" transform="rotate(-90,185,202)">PARALLEL</text>
+
+  <!-- API 1: OpenAI -->
+  <rect x="218" y="112" width="150" height="68" fill="#10A37F" fill-opacity="0.15" stroke="#10A37F" stroke-width="2" rx="10"/>
+  <rect x="220" y="114" width="20" height="20" fill="#10A37F" fill-opacity="0.4" rx="3"/>
+  <text x="230" y="129" text-anchor="middle" font-size="11" fill="#10A37F">AI</text>
+  <text x="320" y="138" text-anchor="middle" font-size="12" font-weight="bold" fill="#10A37F">OpenAI API</text>
+  <text x="320" y="155" text-anchor="middle" font-size="10" fill="#888">GPT · 텍스트 분석</text>
+  <rect x="228" y="160" width="130" height="14" fill="#10A37F" fill-opacity="0.15" rx="3"/>
+  <text x="293" y="171" text-anchor="middle" font-size="9" fill="#aaa">Authorization: Bearer {key}</text>
+
+  <!-- API 2: Google Maps -->
+  <rect x="218" y="168" width="150" height="68" fill="#FBBC05" fill-opacity="0.15" stroke="#FBBC05" stroke-width="2" rx="10"/>
+  <rect x="220" y="170" width="20" height="20" fill="#FBBC05" fill-opacity="0.4" rx="3"/>
+  <text x="230" y="185" text-anchor="middle" font-size="10" fill="#FBBC05">📍</text>
+  <text x="320" y="194" text-anchor="middle" font-size="12" font-weight="bold" fill="#FBBC05">Google Maps API</text>
+  <text x="320" y="211" text-anchor="middle" font-size="10" fill="#888">위치 정보 · Geocoding</text>
+  <rect x="228" y="216" width="130" height="14" fill="#FBBC05" fill-opacity="0.15" rx="3"/>
+  <text x="293" y="227" text-anchor="middle" font-size="9" fill="#aaa">?key={api_key}&amp;address=…</text>
+
+  <!-- API 3: Database -->
+  <rect x="218" y="224" width="150" height="68" fill="#9B59B6" fill-opacity="0.15" stroke="#9B59B6" stroke-width="2" rx="10"/>
+  <rect x="220" y="226" width="20" height="20" fill="#9B59B6" fill-opacity="0.4" rx="3"/>
+  <text x="230" y="241" text-anchor="middle" font-size="10" fill="#9B59B6">🗄️</text>
+  <text x="320" y="250" text-anchor="middle" font-size="12" font-weight="bold" fill="#9B59B6">Database API</text>
+  <text x="320" y="267" text-anchor="middle" font-size="10" fill="#888">PostgreSQL · REST</text>
+  <rect x="228" y="272" width="130" height="14" fill="#9B59B6" fill-opacity="0.15" rx="3"/>
+  <text x="293" y="283" text-anchor="middle" font-size="9" fill="#aaa">SELECT * FROM users …</text>
+
+  <!-- Parallel bracket right -->
+  <line x1="382" y1="118" x2="382" y2="278" stroke="#4A9EFF" stroke-width="2" stroke-opacity="0.3"/>
+
+  <!-- Fan-in arrows to Merge -->
+  <line x1="370" y1="146" x2="440" y2="180" stroke="#4A9EFF" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="370" y1="202" x2="440" y2="196" stroke="#4A9EFF" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="370" y1="258" x2="440" y2="212" stroke="#4A9EFF" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- MERGE NODE -->
+  <rect x="442" y="148" width="110" height="96" fill="#F39C12" fill-opacity="0.15" stroke="#F39C12" stroke-width="2" rx="12"/>
+  <text x="497" y="182" text-anchor="middle" font-size="22" fill="#F39C12">🔗</text>
+  <text x="497" y="204" text-anchor="middle" font-size="12" font-weight="bold" fill="#F39C12">Merge</text>
+  <text x="497" y="222" text-anchor="middle" font-size="10" fill="#888">결과 통합</text>
+  <text x="497" y="238" text-anchor="middle" font-size="10" fill="#888">데이터 병합</text>
+
+  <!-- Arrow Merge → Output -->
+  <line x1="554" y1="196" x2="588" y2="196" stroke="#F39C12" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- OUTPUT NODE -->
+  <rect x="590" y="148" width="110" height="96" fill="#36B37E" fill-opacity="0.15" stroke="#36B37E" stroke-width="2" rx="12" filter="url(#glow)"/>
+  <text x="645" y="182" text-anchor="middle" font-size="22" fill="#36B37E">📤</text>
+  <text x="645" y="204" text-anchor="middle" font-size="12" font-weight="bold" fill="#36B37E">Response</text>
+  <text x="645" y="222" text-anchor="middle" font-size="10" fill="#888">통합 응답</text>
+  <text x="645" y="238" text-anchor="middle" font-size="10" fill="#888">JSON 반환</text>
+
+  <!-- Error path -->
+  <path d="M497 246 Q497 310 645 310 L645 246" stroke="#E74C3C" stroke-width="1" stroke-dasharray="4,3" fill="none" marker-end="url(#arr-red)"/>
+  <text x="571" y="323" text-anchor="middle" font-size="9" fill="#E74C3C">⚠ API 오류 시 재시도 / 폴백</text>
+
+  <!-- Divider -->
+  <line x1="22" y1="346" x2="748" y2="346" stroke="#2A2D3E" stroke-width="1.5"/>
+  <text x="28" y="366" font-size="11" fill="#666" font-weight="bold">▶ 인증 방식 &amp; 핵심 기능</text>
+
+  <!-- Auth Methods -->
+  <rect x="22" y="378" width="148" height="72" fill="#1A1D2E" stroke="#4A9EFF" stroke-opacity="0.4" stroke-width="1" rx="8"/>
+  <text x="96" y="399" text-anchor="middle" font-size="12" fill="#4A9EFF" font-weight="bold">🔑 인증 관리</text>
+  <text x="96" y="418" text-anchor="middle" font-size="10" fill="#888">API Key · OAuth2</text>
+  <text x="96" y="434" text-anchor="middle" font-size="10" fill="#888">JWT · Basic Auth</text>
+  <text x="96" y="444" text-anchor="middle" font-size="9" fill="#555">크리덴셜 중앙 관리</text>
+
+  <rect x="182" y="378" width="148" height="72" fill="#1A1D2E" stroke="#10A37F" stroke-opacity="0.4" stroke-width="1" rx="8"/>
+  <text x="256" y="399" text-anchor="middle" font-size="12" fill="#10A37F" font-weight="bold">⚡ 병렬 실행</text>
+  <text x="256" y="418" text-anchor="middle" font-size="10" fill="#888">Multiple APIs</text>
+  <text x="256" y="434" text-anchor="middle" font-size="10" fill="#888">동시 호출 처리</text>
+  <text x="256" y="444" text-anchor="middle" font-size="9" fill="#555">응답시간 최적화</text>
+
+  <rect x="342" y="378" width="148" height="72" fill="#1A1D2E" stroke="#9B59B6" stroke-opacity="0.4" stroke-width="1" rx="8"/>
+  <text x="416" y="399" text-anchor="middle" font-size="12" fill="#9B59B6" font-weight="bold">🔄 Rate Limit</text>
+  <text x="416" y="418" text-anchor="middle" font-size="10" fill="#888">자동 재시도</text>
+  <text x="416" y="434" text-anchor="middle" font-size="10" fill="#888">딜레이 조정</text>
+  <text x="416" y="444" text-anchor="middle" font-size="9" fill="#555">429 핸들링</text>
+
+  <rect x="502" y="378" width="148" height="72" fill="#1A1D2E" stroke="#F39C12" stroke-opacity="0.4" stroke-width="1" rx="8"/>
+  <text x="576" y="399" text-anchor="middle" font-size="12" fill="#F39C12" font-weight="bold">📡 REST / GraphQL</text>
+  <text x="576" y="418" text-anchor="middle" font-size="10" fill="#888">HTTP Request 노드</text>
+  <text x="576" y="434" text-anchor="middle" font-size="10" fill="#888">GET / POST / PUT</text>
+  <text x="576" y="444" text-anchor="middle" font-size="9" fill="#555">모든 API 호출 가능</text>
+
+  <!-- Bottom example -->
+  <rect x="22" y="464" width="740" height="60" fill="#1A1D2E" rx="8"/>
+  <text x="40" y="483" font-size="11" fill="#aaa" font-weight="bold">실제 예시 시나리오</text>
+  <text x="40" y="500" font-size="10" fill="#888">고객 주문 수신 → [OpenAI: 주문 요약 생성] + [DB: 재고 확인] + [Maps: 배송 경로 계산] (병렬 동시 실행)</text>
+  <text x="40" y="516" font-size="10" fill="#555">→ 결과 통합(Merge) → 배송 예약 API 호출 → 고객에게 최종 응답 반환 (전체 처리: ~1.2초)</text>
+</svg>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="540" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#36B37E"/>
+    </marker>
+    <marker id="arr-out" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4A9EFF"/>
+    </marker>
+    <marker id="arr-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1117"/>
+      <stop offset="100%" stop-color="#0D1F16"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#36B37E" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#36B37E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="540" fill="url(#bgG)" rx="16"/>
+  <rect x="1" y="1" width="798" height="538" fill="none" stroke="#36B37E" stroke-width="1.5" stroke-opacity="0.5" rx="16"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="78" fill="#36B37E" fill-opacity="0.12" rx="16"/>
+  <rect x="0" y="62" width="800" height="16" fill="#36B37E" fill-opacity="0.05"/>
+  <rect x="20" y="18" width="42" height="42" fill="#36B37E" fill-opacity="0.25" rx="8"/>
+  <text x="41" y="46" text-anchor="middle" font-size="20" fill="#36B37E" font-weight="bold">③</text>
+  <text x="420" y="38" text-anchor="middle" font-size="21" font-weight="bold" fill="#36B37E">Event Processing</text>
+  <text x="420" y="60" text-anchor="middle" font-size="12" fill="#888">외부 이벤트 실시간 감지 및 즉시 반응 · Real-time Event Detection &amp; Response</text>
+
+  <!-- Left label -->
+  <text x="28" y="104" font-size="11" fill="#666" font-weight="bold">▶ EVENT SOURCES</text>
+  <text x="530" y="104" font-size="11" fill="#666" font-weight="bold">▶ ACTIONS</text>
+
+  <!-- Center glow -->
+  <circle cx="390" cy="210" r="80" fill="url(#centerGlow)"/>
+
+  <!-- Event Source 1: Webhook -->
+  <rect x="22" y="110" width="160" height="68" fill="#FF6D5A" fill-opacity="0.12" stroke="#FF6D5A" stroke-width="1.8" rx="10"/>
+  <text x="52" y="136" font-size="20" fill="#FF6D5A">🔗</text>
+  <text x="115" y="136" text-anchor="middle" font-size="12" font-weight="bold" fill="#FF6D5A">Webhook</text>
+  <text x="115" y="153" text-anchor="middle" font-size="10" fill="#888">HTTP POST 수신</text>
+  <rect x="30" y="160" width="144" height="12" fill="#FF6D5A" fill-opacity="0.15" rx="3"/>
+  <text x="102" y="170" text-anchor="middle" font-size="9" fill="#FF6D5A">즉시 실행 · Real-time</text>
+
+  <!-- Event Source 2: Polling -->
+  <rect x="22" y="192" width="160" height="68" fill="#F5A623" fill-opacity="0.12" stroke="#F5A623" stroke-width="1.8" rx="10"/>
+  <text x="52" y="218" font-size="20" fill="#F5A623">🔍</text>
+  <text x="115" y="218" text-anchor="middle" font-size="12" font-weight="bold" fill="#F5A623">Polling</text>
+  <text x="115" y="235" text-anchor="middle" font-size="10" fill="#888">주기적 변경 확인</text>
+  <rect x="30" y="242" width="144" height="12" fill="#F5A623" fill-opacity="0.15" rx="3"/>
+  <text x="102" y="252" text-anchor="middle" font-size="9" fill="#F5A623">Email · RSS · API 변경감지</text>
+
+  <!-- Event Source 3: Message Queue -->
+  <rect x="22" y="274" width="160" height="68" fill="#9B59B6" fill-opacity="0.12" stroke="#9B59B6" stroke-width="1.8" rx="10"/>
+  <text x="52" y="300" font-size="20" fill="#9B59B6">📨</text>
+  <text x="115" y="300" text-anchor="middle" font-size="12" font-weight="bold" fill="#9B59B6">Message Queue</text>
+  <text x="115" y="317" text-anchor="middle" font-size="10" fill="#888">큐 메시지 수신</text>
+  <rect x="30" y="324" width="144" height="12" fill="#9B59B6" fill-opacity="0.15" rx="3"/>
+  <text x="102" y="334" text-anchor="middle" font-size="9" fill="#9B59B6">RabbitMQ · Kafka · SQS</text>
+
+  <!-- Event Source 4: DB Trigger -->
+  <rect x="22" y="356" width="160" height="68" fill="#4A9EFF" fill-opacity="0.12" stroke="#4A9EFF" stroke-width="1.8" rx="10"/>
+  <text x="52" y="382" font-size="20" fill="#4A9EFF">🗄️</text>
+  <text x="115" y="382" text-anchor="middle" font-size="12" font-weight="bold" fill="#4A9EFF">DB Trigger</text>
+  <text x="115" y="399" text-anchor="middle" font-size="10" fill="#888">DB 레코드 변경 감지</text>
+  <rect x="30" y="406" width="144" height="12" fill="#4A9EFF" fill-opacity="0.15" rx="3"/>
+  <text x="102" y="416" text-anchor="middle" font-size="9" fill="#4A9EFF">신규 주문 · 상태 변경</text>
+
+  <!-- Arrows to center n8n: from each source -->
+  <!-- Webhook -->
+  <line x1="184" y1="144" x2="316" y2="185" stroke="#FF6D5A" stroke-width="1.8" marker-end="url(#arr)" stroke-opacity="0.8"/>
+  <!-- Polling -->
+  <line x1="184" y1="226" x2="316" y2="200" stroke="#F5A623" stroke-width="1.8" marker-end="url(#arr)" stroke-opacity="0.8"/>
+  <!-- Message Queue -->
+  <line x1="184" y1="308" x2="316" y2="220" stroke="#9B59B6" stroke-width="1.8" marker-end="url(#arr)" stroke-opacity="0.8"/>
+  <!-- DB Trigger -->
+  <line x1="184" y1="390" x2="316" y2="235" stroke="#4A9EFF" stroke-width="1.8" marker-end="url(#arr)" stroke-opacity="0.8"/>
+
+  <!-- Center: n8n Engine -->
+  <rect x="296" y="160" width="188" height="100" fill="#36B37E" fill-opacity="0.15" stroke="#36B37E" stroke-width="2.5" rx="16" filter="url(#glow)"/>
+  <text x="390" y="198" text-anchor="middle" font-size="26" fill="#36B37E">⚙️</text>
+  <text x="390" y="222" text-anchor="middle" font-size="14" font-weight="bold" fill="#36B37E">n8n Engine</text>
+  <text x="390" y="240" text-anchor="middle" font-size="10" fill="#aaa">이벤트 처리 · 라우팅 · 실행</text>
+
+  <!-- Heartbeat dots -->
+  <circle cx="320" cy="155" r="4" fill="#36B37E" fill-opacity="0.6"/>
+  <circle cx="390" cy="150" r="4" fill="#36B37E" fill-opacity="0.4"/>
+  <circle cx="460" cy="155" r="4" fill="#36B37E" fill-opacity="0.6"/>
+
+  <!-- Arrows from center to actions -->
+  <line x1="486" y1="185" x2="560" y2="155" stroke="#4A9EFF" stroke-width="1.8" marker-end="url(#arr-out)" stroke-opacity="0.8"/>
+  <line x1="486" y1="210" x2="560" y2="228" stroke="#4A9EFF" stroke-width="1.8" marker-end="url(#arr-out)" stroke-opacity="0.8"/>
+  <line x1="486" y1="230" x2="560" y2="302" stroke="#4A9EFF" stroke-width="1.8" marker-end="url(#arr-out)" stroke-opacity="0.8"/>
+
+  <!-- Action 1: Process Data -->
+  <rect x="562" y="110" width="200" height="72" fill="#36B37E" fill-opacity="0.12" stroke="#36B37E" stroke-width="1.8" rx="10"/>
+  <text x="598" y="145" font-size="20" fill="#36B37E">🔄</text>
+  <text x="665" y="138" text-anchor="middle" font-size="12" font-weight="bold" fill="#36B37E">Process Data</text>
+  <text x="665" y="155" text-anchor="middle" font-size="10" fill="#888">데이터 변환 · 저장</text>
+  <text x="665" y="171" text-anchor="middle" font-size="10" fill="#888">DB 업데이트 · 분석</text>
+
+  <!-- Action 2: Send Notification -->
+  <rect x="562" y="196" width="200" height="72" fill="#F5A623" fill-opacity="0.12" stroke="#F5A623" stroke-width="1.8" rx="10"/>
+  <text x="598" y="231" font-size="20" fill="#F5A623">🔔</text>
+  <text x="665" y="224" text-anchor="middle" font-size="12" font-weight="bold" fill="#F5A623">Send Notification</text>
+  <text x="665" y="241" text-anchor="middle" font-size="10" fill="#888">Slack · Email · SMS</text>
+  <text x="665" y="257" text-anchor="middle" font-size="10" fill="#888">Push · Telegram</text>
+
+  <!-- Action 3: Trigger Workflow -->
+  <rect x="562" y="282" width="200" height="72" fill="#9B59B6" fill-opacity="0.12" stroke="#9B59B6" stroke-width="1.8" rx="10"/>
+  <text x="598" y="317" font-size="20" fill="#9B59B6">🚀</text>
+  <text x="665" y="310" text-anchor="middle" font-size="12" font-weight="bold" fill="#9B59B6">Trigger Workflow</text>
+  <text x="665" y="327" text-anchor="middle" font-size="10" fill="#888">서브 워크플로우 실행</text>
+  <text x="665" y="343" text-anchor="middle" font-size="10" fill="#888">체이닝 · 파이프라인</text>
+
+  <!-- Divider -->
+  <line x1="22" y1="446" x2="748" y2="446" stroke="#2A2D3E" stroke-width="1.5"/>
+
+  <!-- Type comparison table -->
+  <text x="28" y="464" font-size="11" fill="#666" font-weight="bold">▶ 이벤트 유형 비교</text>
+
+  <!-- Table header -->
+  <rect x="22" y="472" width="740" height="22" fill="#36B37E" fill-opacity="0.15" rx="4"/>
+  <text x="100" y="487" text-anchor="middle" font-size="10" fill="#36B37E" font-weight="bold">유형</text>
+  <text x="255" y="487" text-anchor="middle" font-size="10" fill="#36B37E" font-weight="bold">트리거 조건</text>
+  <text x="430" y="487" text-anchor="middle" font-size="10" fill="#36B37E" font-weight="bold">지연 시간</text>
+  <text x="600" y="487" text-anchor="middle" font-size="10" fill="#36B37E" font-weight="bold">사용 예시</text>
+
+  <!-- Row 1 -->
+  <rect x="22" y="494" width="740" height="18" fill="#1A1D2E" rx="0"/>
+  <text x="100" y="507" text-anchor="middle" font-size="9" fill="#FF6D5A">Webhook</text>
+  <text x="255" y="507" text-anchor="middle" font-size="9" fill="#888">HTTP 요청 수신 즉시</text>
+  <text x="430" y="507" text-anchor="middle" font-size="9" fill="#4CAF50">~ms (즉시)</text>
+  <text x="600" y="507" text-anchor="middle" font-size="9" fill="#888">결제 완료 · GitHub Push</text>
+
+  <!-- Row 2 -->
+  <rect x="22" y="512" width="740" height="18" fill="#141820" rx="0"/>
+  <text x="100" y="525" text-anchor="middle" font-size="9" fill="#F5A623">Polling</text>
+  <text x="255" y="525" text-anchor="middle" font-size="9" fill="#888">주기적 확인 (1분~)</text>
+  <text x="430" y="525" text-anchor="middle" font-size="9" fill="#F5A623">~분 단위</text>
+  <text x="600" y="525" text-anchor="middle" font-size="9" fill="#888">새 이메일 · RSS 피드</text>
+</svg>

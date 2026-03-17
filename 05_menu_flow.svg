@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1100" height="780" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arr-d" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 7 3, 0 6" fill="#00d4ff"/>
+    </marker>
+    <marker id="arr-gray" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 7 3, 0 6" fill="#444"/>
+    </marker>
+    <marker id="arr-w" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <polygon points="0 0, 7 3, 0 6" fill="#555"/>
+    </marker>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080C12"/>
+      <stop offset="100%" stop-color="#0b1420"/>
+    </linearGradient>
+    <linearGradient id="navGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1f3c"/>
+      <stop offset="100%" stop-color="#091628"/>
+    </linearGradient>
+    <linearGradient id="homeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="archGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="manualGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="chatGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="dashGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="agentGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.05"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ===== BACKGROUND ===== -->
+  <rect width="1100" height="780" fill="url(#bgG)" rx="18"/>
+  <rect x="1" y="1" width="1098" height="778" fill="none" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.25" rx="18"/>
+  <!-- Grid -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="1100" height="780" fill="url(#grid)" rx="18"/>
+
+  <!-- ===== TITLE ===== -->
+  <text x="550" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">n8n AI Super Platform — 접근 메뉴 플로우</text>
+  <text x="550" y="56" text-anchor="middle" font-size="12" fill="#666">Menu Navigation Flow · 사용자 접근 경로 전체 구조도</text>
+  <line x1="40" y1="66" x2="1060" y2="66" stroke="#00d4ff" stroke-width="0.5" stroke-opacity="0.3"/>
+
+  <!-- ===== USER ENTRY POINT ===== -->
+  <rect x="456" y="78" width="188" height="46" fill="#00d4ff" fill-opacity="0.15" stroke="#00d4ff" stroke-width="2" rx="10" filter="url(#glow)"/>
+  <text x="550" y="99" text-anchor="middle" font-size="13" font-weight="bold" fill="#00d4ff">🌐 사용자 접속 (User)</text>
+  <text x="550" y="115" text-anchor="middle" font-size="10" fill="#888">브라우저 → index.html</text>
+
+  <!-- Entry to Nav arrow -->
+  <line x1="550" y1="124" x2="550" y2="145" stroke="#00d4ff" stroke-width="2" marker-end="url(#arr-d)"/>
+
+  <!-- ===== TOP NAVIGATION BAR ===== -->
+  <rect x="20" y="148" width="1060" height="52" fill="url(#navGrad)" stroke="#00d4ff" stroke-width="1.5" stroke-opacity="0.5" rx="10" filter="url(#softGlow)"/>
+  <!-- Logo -->
+  <text x="50" y="178" font-size="13" font-weight="bold" fill="#00d4ff">⚡ n8n AI Platform</text>
+  <!-- Nav items -->
+  <rect x="200" y="158" width="70" height="30" fill="#00d4ff" fill-opacity="0.12" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.5" rx="6"/>
+  <text x="235" y="177" text-anchor="middle" font-size="11" fill="#00d4ff">🏠 홈</text>
+
+  <rect x="280" y="158" width="76" height="30" fill="#7c3aed" fill-opacity="0.12" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.5" rx="6"/>
+  <text x="318" y="177" text-anchor="middle" font-size="11" fill="#a78bfa">🗺️ 구조도</text>
+
+  <rect x="366" y="158" width="74" height="30" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="1" stroke-opacity="0.5" rx="6"/>
+  <text x="403" y="177" text-anchor="middle" font-size="11" fill="#10b981">📖 매뉴얼</text>
+
+  <rect x="450" y="158" width="70" height="30" fill="#f59e0b" fill-opacity="0.12" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.5" rx="6"/>
+  <text x="485" y="177" text-anchor="middle" font-size="11" fill="#f59e0b">💬 챗봇</text>
+
+  <rect x="530" y="158" width="82" height="30" fill="#ef4444" fill-opacity="0.12" stroke="#ef4444" stroke-width="1" stroke-opacity="0.5" rx="6"/>
+  <text x="571" y="177" text-anchor="middle" font-size="11" fill="#ef4444">📊 대시보드</text>
+
+  <rect x="622" y="158" width="90" height="30" fill="#ec4899" fill-opacity="0.12" stroke="#ec4899" stroke-width="1" stroke-opacity="0.5" rx="6"/>
+  <text x="667" y="177" text-anchor="middle" font-size="11" fill="#ec4899">🤖 AI 에이전트</text>
+
+  <!-- CTA button -->
+  <rect x="960" y="158" width="100" height="30" fill="#00d4ff" fill-opacity="0.9" rx="6"/>
+  <text x="1010" y="177" text-anchor="middle" font-size="11" fill="#000" font-weight="bold">▶ 시작하기</text>
+
+  <!-- ===== ARROWS FROM NAV TO PAGES ===== -->
+  <!-- Home -->
+  <line x1="235" y1="200" x2="108" y2="248" stroke="#00d4ff" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#arr-d)"/>
+  <!-- Architecture -->
+  <line x1="318" y1="200" x2="286" y2="248" stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#arr-d)"/>
+  <!-- Manual -->
+  <line x1="403" y1="200" x2="463" y2="248" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#arr-d)"/>
+  <!-- Chatbot -->
+  <line x1="485" y1="200" x2="637" y2="248" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#arr-d)"/>
+  <!-- Dashboard -->
+  <line x1="571" y1="200" x2="805" y2="248" stroke="#ef4444" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#arr-d)"/>
+  <!-- Agents -->
+  <line x1="667" y1="200" x2="983" y2="248" stroke="#ec4899" stroke-width="1.5" stroke-opacity="0.7" marker-end="url(#arr-d)"/>
+
+  <!-- ===== PAGE 1: 홈 (index.html) ===== -->
+  <rect x="20" y="250" width="176" height="52" fill="url(#homeGrad)" stroke="#00d4ff" stroke-width="2" rx="10"/>
+  <text x="108" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#00d4ff">🏠 홈</text>
+  <text x="108" y="288" text-anchor="middle" font-size="10" fill="#888">index.html</text>
+  <!-- Sub items -->
+  <line x1="108" y1="302" x2="108" y2="322" stroke="#00d4ff" stroke-width="1.2" stroke-opacity="0.5" marker-end="url(#arr-gray)"/>
+  <rect x="20" y="324" width="176" height="220" fill="#00d4ff" fill-opacity="0.04" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="108" y="343" text-anchor="middle" font-size="9" fill="#555" font-weight="bold">── 섹션 구성 ──</text>
+  <rect x="28" y="350" width="160" height="20" fill="#00d4ff" fill-opacity="0.1" rx="4"/>
+  <text x="108" y="364" text-anchor="middle" font-size="10" fill="#00d4ff">🎯 Hero (메인 배너)</text>
+  <rect x="28" y="374" width="160" height="20" fill="#00d4ff" fill-opacity="0.08" rx="4"/>
+  <text x="108" y="388" text-anchor="middle" font-size="10" fill="#aaa">📊 Stats (핵심 지표)</text>
+  <rect x="28" y="398" width="160" height="20" fill="#00d4ff" fill-opacity="0.06" rx="4"/>
+  <text x="108" y="412" text-anchor="middle" font-size="10" fill="#aaa">⚙️ n8n 자동화 엔진</text>
+  <rect x="28" y="422" width="160" height="20" fill="#00d4ff" fill-opacity="0.06" rx="4"/>
+  <text x="108" y="436" text-anchor="middle" font-size="10" fill="#aaa">🤖 AI 에이전트 100개</text>
+  <rect x="28" y="446" width="160" height="20" fill="#00d4ff" fill-opacity="0.06" rx="4"/>
+  <text x="108" y="460" text-anchor="middle" font-size="10" fill="#aaa">🚀 플랫폼 기능 소개</text>
+  <rect x="28" y="470" width="160" height="20" fill="#00d4ff" fill-opacity="0.06" rx="4"/>
+  <text x="108" y="484" text-anchor="middle" font-size="10" fill="#aaa">📞 CTA / 시작하기</text>
+  <!-- Arrow to chatbot (CTA) -->
+  <path d="M108 530 Q108 560 485 560 L637 560" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4,3" fill="none" stroke-opacity="0.35" marker-end="url(#arr-d)"/>
+  <text x="320" y="553" text-anchor="middle" font-size="8" fill="#555">CTA → 챗봇 이동</text>
+
+  <!-- ===== PAGE 2: 구조도 (architecture.html) ===== -->
+  <rect x="206" y="250" width="176" height="52" fill="url(#archGrad)" stroke="#7c3aed" stroke-width="2" rx="10"/>
+  <text x="294" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#a78bfa">🗺️ 구조도</text>
+  <text x="294" y="288" text-anchor="middle" font-size="10" fill="#888">architecture.html</text>
+  <!-- Sub items: 4 tabs -->
+  <line x1="294" y1="302" x2="294" y2="322" stroke="#7c3aed" stroke-width="1.2" stroke-opacity="0.5" marker-end="url(#arr-gray)"/>
+  <rect x="206" y="324" width="176" height="220" fill="#7c3aed" fill-opacity="0.04" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="294" y="343" text-anchor="middle" font-size="9" fill="#555" font-weight="bold">── 4개 탭 구성 ──</text>
+  <rect x="214" y="350" width="160" height="20" fill="#7c3aed" fill-opacity="0.2" rx="4"/>
+  <text x="294" y="364" text-anchor="middle" font-size="10" fill="#a78bfa">🏗️ 7계층 플랫폼 구조</text>
+  <rect x="214" y="374" width="160" height="20" fill="#7c3aed" fill-opacity="0.12" rx="4"/>
+  <text x="294" y="388" text-anchor="middle" font-size="10" fill="#c4b5fd">🤝 멀티 에이전트 시스템</text>
+  <rect x="214" y="398" width="160" height="20" fill="#7c3aed" fill-opacity="0.08" rx="4"/>
+  <text x="294" y="412" text-anchor="middle" font-size="10" fill="#aaa">⚙️ n8n 워크플로 예시</text>
+  <rect x="214" y="422" width="160" height="20" fill="#7c3aed" fill-opacity="0.08" rx="4"/>
+  <text x="294" y="436" text-anchor="middle" font-size="10" fill="#aaa">☁️ SaaS 플랫폼 구조</text>
+  <text x="294" y="462" text-anchor="middle" font-size="9" fill="#666">※ 탭 클릭으로 전환</text>
+  <!-- SVG badge -->
+  <rect x="214" y="480" width="160" height="50" fill="#7c3aed" fill-opacity="0.08" stroke="#7c3aed" stroke-width="0.5" stroke-opacity="0.4" rx="4"/>
+  <text x="294" y="496" text-anchor="middle" font-size="9" fill="#888">📄 상세 SVG 구조도</text>
+  <text x="294" y="510" text-anchor="middle" font-size="9" fill="#7c3aed">00_n8n_overview.svg</text>
+  <text x="294" y="524" text-anchor="middle" font-size="9" fill="#7c3aed">01~04_*.svg 연동</text>
+
+  <!-- ===== PAGE 3: 매뉴얼 (manual.html) ===== -->
+  <rect x="392" y="250" width="176" height="52" fill="url(#manualGrad)" stroke="#10b981" stroke-width="2" rx="10"/>
+  <text x="480" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#10b981">📖 매뉴얼</text>
+  <text x="480" y="288" text-anchor="middle" font-size="10" fill="#888">manual.html</text>
+  <!-- Sub items: sidebar -->
+  <line x1="480" y1="302" x2="480" y2="322" stroke="#10b981" stroke-width="1.2" stroke-opacity="0.5" marker-end="url(#arr-gray)"/>
+  <rect x="392" y="324" width="176" height="220" fill="#10b981" fill-opacity="0.04" stroke="#10b981" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="480" y="343" text-anchor="middle" font-size="9" fill="#555" font-weight="bold">── 사이드바 메뉴 ──</text>
+  <!-- Group: 시작하기 -->
+  <text x="404" y="360" font-size="8" fill="#10b981" font-weight="bold">▸ 시작하기</text>
+  <text x="416" y="374" font-size="9" fill="#888">· n8n 소개</text>
+  <text x="416" y="386" font-size="9" fill="#888">· 왜 n8n인가?</text>
+  <!-- Group: 핵심 노드 -->
+  <text x="404" y="402" font-size="8" fill="#10b981" font-weight="bold">▸ 핵심 노드</text>
+  <text x="416" y="416" font-size="9" fill="#888">· Webhook 노드</text>
+  <text x="416" y="428" font-size="9" fill="#888">· HTTP Request</text>
+  <text x="416" y="440" font-size="9" fill="#888">· AI Agent 노드</text>
+  <!-- Group: 워크플로우 -->
+  <text x="404" y="456" font-size="8" fill="#10b981" font-weight="bold">▸ 워크플로우</text>
+  <text x="416" y="470" font-size="9" fill="#888">· 예제 10선</text>
+  <text x="416" y="482" font-size="9" fill="#888">· AI 상담 자동화</text>
+  <!-- Group: 사업 적용 -->
+  <text x="404" y="498" font-size="8" fill="#10b981" font-weight="bold">▸ 사업 적용 · 참고</text>
+  <text x="416" y="512" font-size="9" fill="#888">· 세일즈 자동화</text>
+  <text x="416" y="524" font-size="9" fill="#888">· 비용 절감 사례</text>
+
+  <!-- ===== PAGE 4: 챗봇 (chatbot.html) ===== -->
+  <rect x="558" y="250" width="158" height="52" fill="url(#chatGrad)" stroke="#f59e0b" stroke-width="2" rx="10"/>
+  <text x="637" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#f59e0b">💬 챗봇</text>
+  <text x="637" y="288" text-anchor="middle" font-size="10" fill="#888">chatbot.html</text>
+  <!-- Sub items -->
+  <line x1="637" y1="302" x2="637" y2="322" stroke="#f59e0b" stroke-width="1.2" stroke-opacity="0.5" marker-end="url(#arr-gray)"/>
+  <rect x="558" y="324" width="158" height="220" fill="#f59e0b" fill-opacity="0.04" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="637" y="343" text-anchor="middle" font-size="9" fill="#555" font-weight="bold">── 기능 구성 ──</text>
+  <rect x="566" y="350" width="142" height="20" fill="#f59e0b" fill-opacity="0.15" rx="4"/>
+  <text x="637" y="364" text-anchor="middle" font-size="10" fill="#f59e0b">🤖 AI 대화 인터페이스</text>
+  <rect x="566" y="374" width="142" height="20" fill="#f59e0b" fill-opacity="0.08" rx="4"/>
+  <text x="637" y="388" text-anchor="middle" font-size="10" fill="#aaa">📋 추천 질문 카드</text>
+  <rect x="566" y="398" width="142" height="20" fill="#f59e0b" fill-opacity="0.08" rx="4"/>
+  <text x="637" y="412" text-anchor="middle" font-size="10" fill="#aaa">💡 Gemini API 연동</text>
+  <rect x="566" y="422" width="142" height="20" fill="#f59e0b" fill-opacity="0.08" rx="4"/>
+  <text x="637" y="436" text-anchor="middle" font-size="10" fill="#aaa">📨 메시지 히스토리</text>
+  <rect x="566" y="446" width="142" height="20" fill="#f59e0b" fill-opacity="0.08" rx="4"/>
+  <text x="637" y="460" text-anchor="middle" font-size="10" fill="#aaa">⚙️ 모델 설정</text>
+  <rect x="566" y="470" width="142" height="30" fill="#f59e0b" fill-opacity="0.08" rx="4"/>
+  <text x="637" y="483" text-anchor="middle" font-size="9" fill="#888">키 입력 → AI 응답</text>
+  <text x="637" y="495" text-anchor="middle" font-size="9" fill="#666">Gemini 1.5 Pro</text>
+  <!-- CTA label -->
+  <rect x="566" y="506" width="142" height="24" fill="#f59e0b" fill-opacity="0.2" rx="4"/>
+  <text x="637" y="522" text-anchor="middle" font-size="9" fill="#f59e0b">▶ 시작하기 CTA 진입점</text>
+
+  <!-- ===== PAGE 5: 대시보드 (dashboard.html) ===== -->
+  <rect x="726" y="250" width="158" height="52" fill="url(#dashGrad)" stroke="#ef4444" stroke-width="2" rx="10"/>
+  <text x="805" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#ef4444">📊 대시보드</text>
+  <text x="805" y="288" text-anchor="middle" font-size="10" fill="#888">dashboard.html</text>
+  <!-- Sub items -->
+  <line x1="805" y1="302" x2="805" y2="322" stroke="#ef4444" stroke-width="1.2" stroke-opacity="0.5" marker-end="url(#arr-gray)"/>
+  <rect x="726" y="324" width="158" height="220" fill="#ef4444" fill-opacity="0.04" stroke="#ef4444" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="805" y="343" text-anchor="middle" font-size="9" fill="#555" font-weight="bold">── 대시보드 구성 ──</text>
+  <rect x="734" y="350" width="142" height="20" fill="#ef4444" fill-opacity="0.15" rx="4"/>
+  <text x="805" y="364" text-anchor="middle" font-size="10" fill="#ef4444">📈 실시간 KPI 현황</text>
+  <rect x="734" y="374" width="142" height="20" fill="#ef4444" fill-opacity="0.08" rx="4"/>
+  <text x="805" y="388" text-anchor="middle" font-size="10" fill="#aaa">🔄 워크플로 실행 현황</text>
+  <rect x="734" y="398" width="142" height="20" fill="#ef4444" fill-opacity="0.08" rx="4"/>
+  <text x="805" y="412" text-anchor="middle" font-size="10" fill="#aaa">🤖 에이전트 활동 로그</text>
+  <rect x="734" y="422" width="142" height="20" fill="#ef4444" fill-opacity="0.08" rx="4"/>
+  <text x="805" y="436" text-anchor="middle" font-size="10" fill="#aaa">📊 사용자별 통계</text>
+  <rect x="734" y="446" width="142" height="20" fill="#ef4444" fill-opacity="0.08" rx="4"/>
+  <text x="805" y="460" text-anchor="middle" font-size="10" fill="#aaa">⚙️ 시스템 상태 모니터</text>
+  <rect x="734" y="470" width="142" height="30" fill="#ef4444" fill-opacity="0.08" rx="4"/>
+  <text x="805" y="483" text-anchor="middle" font-size="9" fill="#888">Gemini API 키 상태</text>
+  <text x="805" y="495" text-anchor="middle" font-size="9" fill="#666">사용자별 대시보드</text>
+
+  <!-- ===== PAGE 6: AI 에이전트 (agents.html) ===== -->
+  <rect x="894" y="250" width="176" height="52" fill="url(#agentGrad)" stroke="#ec4899" stroke-width="2" rx="10"/>
+  <text x="982" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#ec4899">🤖 AI 에이전트</text>
+  <text x="982" y="288" text-anchor="middle" font-size="10" fill="#888">agents.html</text>
+  <!-- Sub items -->
+  <line x1="982" y1="302" x2="982" y2="322" stroke="#ec4899" stroke-width="1.2" stroke-opacity="0.5" marker-end="url(#arr-gray)"/>
+  <rect x="894" y="324" width="176" height="220" fill="#ec4899" fill-opacity="0.04" stroke="#ec4899" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="982" y="343" text-anchor="middle" font-size="9" fill="#555" font-weight="bold">── 에이전트 카탈로그 ──</text>
+  <rect x="902" y="350" width="160" height="20" fill="#ec4899" fill-opacity="0.2" rx="4"/>
+  <text x="982" y="364" text-anchor="middle" font-size="10" fill="#ec4899">🔍 AI 추천 검색</text>
+  <!-- Filter tabs -->
+  <text x="910" y="382" font-size="8" fill="#ec4899" font-weight="bold">필터 탭 (카테고리)</text>
+  <rect x="902" y="386" width="72" height="16" fill="#ec4899" fill-opacity="0.15" rx="10"/>
+  <text x="938" y="398" text-anchor="middle" font-size="8" fill="#ec4899">전체 100</text>
+  <rect x="980" y="386" width="72" height="16" fill="#ec4899" fill-opacity="0.08" rx="10"/>
+  <text x="1016" y="398" text-anchor="middle" font-size="8" fill="#888">영업/마케팅</text>
+  <rect x="902" y="406" width="66" height="16" fill="#ec4899" fill-opacity="0.08" rx="10"/>
+  <text x="935" y="418" text-anchor="middle" font-size="8" fill="#888">의료/헬스</text>
+  <rect x="974" y="406" width="66" height="16" fill="#ec4899" fill-opacity="0.08" rx="10"/>
+  <text x="1007" y="418" text-anchor="middle" font-size="8" fill="#888">교육</text>
+  <rect x="902" y="426" width="66" height="16" fill="#ec4899" fill-opacity="0.08" rx="10"/>
+  <text x="935" y="438" text-anchor="middle" font-size="8" fill="#888">법률</text>
+  <rect x="974" y="426" width="66" height="16" fill="#ec4899" fill-opacity="0.08" rx="10"/>
+  <text x="1007" y="438" text-anchor="middle" font-size="8" fill="#888">금융</text>
+  <!-- Card -->
+  <rect x="902" y="448" width="160" height="40" fill="#ec4899" fill-opacity="0.08" stroke="#ec4899" stroke-width="0.5" rx="6"/>
+  <text x="982" y="463" text-anchor="middle" font-size="9" fill="#888">에이전트 카드 클릭</text>
+  <text x="982" y="478" text-anchor="middle" font-size="9" fill="#ec4899">→ 모달 상세 정보</text>
+  <text x="982" y="498" text-anchor="middle" font-size="9" fill="#666">n8n 워크플로 연동 안내</text>
+  <text x="982" y="510" text-anchor="middle" font-size="9" fill="#555">API 엔드포인트 표시</text>
+
+  <!-- ===== BOTTOM SECTION: CROSS-PAGE FLOWS ===== -->
+  <line x1="40" y1="580" x2="1060" y2="580" stroke="#333" stroke-width="1"/>
+  <text x="550" y="598" text-anchor="middle" font-size="11" fill="#666" font-weight="bold">▶ 페이지 간 이동 흐름 (Cross-Page Navigation)</text>
+
+  <!-- Flow boxes -->
+  <rect x="40" y="610" width="300" height="60" fill="#00d4ff" fill-opacity="0.05" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="190" y="630" text-anchor="middle" font-size="10" fill="#00d4ff" font-weight="bold">🎯 메인 접근 경로 (Primary)</text>
+  <text x="190" y="648" text-anchor="middle" font-size="10" fill="#888">홈 → 시작하기(CTA) → 챗봇</text>
+  <text x="190" y="662" text-anchor="middle" font-size="10" fill="#666">홈 → 구조도 보기 → architecture.html</text>
+
+  <rect x="360" y="610" width="300" height="60" fill="#7c3aed" fill-opacity="0.05" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="510" y="630" text-anchor="middle" font-size="10" fill="#a78bfa" font-weight="bold">📚 학습 경로 (Learning)</text>
+  <text x="510" y="648" text-anchor="middle" font-size="10" fill="#888">홈 → 매뉴얼 → 구조도</text>
+  <text x="510" y="662" text-anchor="middle" font-size="10" fill="#666">매뉴얼 → 챗봇 (질문하기)</text>
+
+  <rect x="680" y="610" width="380" height="60" fill="#10b981" fill-opacity="0.05" stroke="#10b981" stroke-width="1" stroke-opacity="0.3" rx="8"/>
+  <text x="870" y="630" text-anchor="middle" font-size="10" fill="#10b981" font-weight="bold">🚀 운영 경로 (Operation)</text>
+  <text x="870" y="648" text-anchor="middle" font-size="10" fill="#888">홈 → 에이전트 → 대시보드</text>
+  <text x="870" y="662" text-anchor="middle" font-size="10" fill="#666">에이전트 카탈로그 → n8n 워크플로 적용</text>
+
+  <!-- Bottom legend -->
+  <rect x="40" y="688" width="1020" height="72" fill="#0d1520" rx="8"/>
+  <text x="60" y="706" font-size="10" fill="#888" font-weight="bold">파일 구조</text>
+  <text x="60" y="724" font-size="9" fill="#666">index.html · architecture.html · manual.html · chatbot.html · dashboard.html · agents.html</text>
+  <text x="60" y="740" font-size="9" fill="#555">SVG 구조도: 00_n8n_overview.svg (통합) · 01_workflow_automation · 02_api_orchestration · 03_event_processing · 04_cron_scheduler · 05_menu_flow</text>
+
+  <!-- Legend icons -->
+  <rect x="700" y="700" width="12" height="12" fill="#00d4ff" fill-opacity="0.3" stroke="#00d4ff" stroke-width="1" rx="2"/>
+  <text x="716" y="711" font-size="9" fill="#888">홈</text>
+  <rect x="740" y="700" width="12" height="12" fill="#7c3aed" fill-opacity="0.3" stroke="#7c3aed" stroke-width="1" rx="2"/>
+  <text x="756" y="711" font-size="9" fill="#888">구조도</text>
+  <rect x="800" y="700" width="12" height="12" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="1" rx="2"/>
+  <text x="816" y="711" font-size="9" fill="#888">매뉴얼</text>
+  <rect x="860" y="700" width="12" height="12" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1" rx="2"/>
+  <text x="876" y="711" font-size="9" fill="#888">챗봇</text>
+  <rect x="912" y="700" width="12" height="12" fill="#ef4444" fill-opacity="0.3" stroke="#ef4444" stroke-width="1" rx="2"/>
+  <text x="928" y="711" font-size="9" fill="#888">대시보드</text>
+  <rect x="974" y="700" width="12" height="12" fill="#ec4899" fill-opacity="0.3" stroke="#ec4899" stroke-width="1" rx="2"/>
+  <text x="990" y="711" font-size="9" fill="#888">에이전트</text>
+</svg>

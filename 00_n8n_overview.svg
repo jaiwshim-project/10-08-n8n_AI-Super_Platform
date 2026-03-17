@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="700" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arr-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#FF6D5A"/>
+    </marker>
+    <marker id="arr-b" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4A9EFF"/>
+    </marker>
+    <marker id="arr-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#36B37E"/>
+    </marker>
+    <marker id="arr-p" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9B59B6"/>
+    </marker>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080C12"/>
+      <stop offset="100%" stop-color="#0E1420"/>
+    </linearGradient>
+    <radialGradient id="centerPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="700" fill="url(#bgG)" rx="20"/>
+  <rect x="1" y="1" width="998" height="698" fill="none" stroke="#333" stroke-width="1.5" rx="20"/>
+
+  <!-- Subtle grid lines -->
+  <line x1="500" y1="0" x2="500" y2="700" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.05"/>
+  <line x1="0" y1="350" x2="1000" y2="350" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.05"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1000" height="72" fill="#ffffff" fill-opacity="0.03" rx="20"/>
+  <text x="500" y="36" text-anchor="middle" font-size="26" font-weight="bold" fill="#ffffff">n8n 자동화 엔진 · Core Architecture</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#666">4가지 핵심 구성요소의 통합 구조도 · Integrated System Overview</text>
+  <line x1="40" y1="70" x2="960" y2="70" stroke="#333" stroke-width="1"/>
+
+  <!-- ============ CENTER: n8n ENGINE ============ -->
+  <!-- Outer pulse ring -->
+  <circle cx="500" cy="370" r="105" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.08"/>
+  <circle cx="500" cy="370" r="82" fill="url(#centerPulse)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.15"/>
+
+  <!-- Center box -->
+  <rect x="418" y="308" width="164" height="124" fill="#1A1D2E" stroke="#ffffff" stroke-width="2" stroke-opacity="0.4" rx="18" filter="url(#glow)"/>
+  <rect x="420" y="310" width="160" height="120" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.2" rx="16"/>
+
+  <!-- n8n Logo area -->
+  <text x="500" y="353" text-anchor="middle" font-size="34" fill="#ffffff">⚙️</text>
+  <text x="500" y="382" text-anchor="middle" font-size="18" font-weight="bold" fill="#ffffff">n8n</text>
+  <text x="500" y="400" text-anchor="middle" font-size="11" fill="#aaa">Automation Engine</text>
+  <text x="500" y="416" text-anchor="middle" font-size="10" fill="#666">이벤트 · 스케줄 · API · 플로우</text>
+
+  <!-- ============ TOP: CRON SCHEDULER ============ -->
+  <rect x="350" y="90" width="300" height="160" fill="#9B59B6" fill-opacity="0.1" stroke="#9B59B6" stroke-width="2" rx="14" filter="url(#softGlow)"/>
+  <!-- Inner header -->
+  <rect x="352" y="92" width="296" height="34" fill="#9B59B6" fill-opacity="0.25" rx="12"/>
+  <text x="390" y="115" font-size="18" fill="#9B59B6">④</text>
+  <text x="500" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#9B59B6">Cron Scheduler</text>
+  <!-- Content -->
+  <text x="500" y="143" text-anchor="middle" font-size="11" fill="#ddd">🕘 시간 기반 자동 실행</text>
+  <rect x="368" y="152" width="264" height="18" fill="#9B59B6" fill-opacity="0.15" rx="4"/>
+  <text x="500" y="165" text-anchor="middle" font-size="11" fill="#aaa" font-family="'Courier New', monospace">0 9 * * 1-5  →  평일 9시 실행</text>
+  <text x="500" y="185" text-anchor="middle" font-size="10" fill="#888">*/30 * * * *  →  30분마다</text>
+  <text x="500" y="202" text-anchor="middle" font-size="10" fill="#888">0 0 * * *  →  매일 자정</text>
+  <text x="500" y="220" text-anchor="middle" font-size="10" fill="#777">Schedule → Trigger → Execute → Log</text>
+  <!-- Badge -->
+  <rect x="596" y="96" width="46" height="16" fill="#9B59B6" fill-opacity="0.4" rx="4"/>
+  <text x="619" y="108" text-anchor="middle" font-size="9" fill="#ddd">TIMER</text>
+
+  <!-- Arrow: Cron → Center -->
+  <line x1="500" y1="252" x2="500" y2="305" stroke="#9B59B6" stroke-width="2.5" marker-end="url(#arr-p)" stroke-dasharray="6,3"/>
+  <rect x="464" y="264" width="72" height="16" fill="#9B59B6" fill-opacity="0.2" rx="4"/>
+  <text x="500" y="276" text-anchor="middle" font-size="9" fill="#9B59B6">시간 도달 트리거</text>
+
+  <!-- ============ LEFT: WORKFLOW AUTOMATION ============ -->
+  <rect x="30" y="230" width="280" height="280" fill="#FF6D5A" fill-opacity="0.1" stroke="#FF6D5A" stroke-width="2" rx="14" filter="url(#softGlow)"/>
+  <!-- Inner header -->
+  <rect x="32" y="232" width="276" height="34" fill="#FF6D5A" fill-opacity="0.25" rx="12"/>
+  <text x="62" y="255" font-size="18" fill="#FF6D5A">①</text>
+  <text x="178" y="255" text-anchor="middle" font-size="13" font-weight="bold" fill="#FF6D5A">Workflow Automation</text>
+  <!-- Mini flow nodes -->
+  <rect x="48" y="278" width="54" height="34" fill="#FF6D5A" fill-opacity="0.2" stroke="#FF6D5A" stroke-width="1" rx="6"/>
+  <text x="75" y="294" text-anchor="middle" font-size="10" fill="#FF6D5A">⚡ Trigger</text>
+  <text x="75" y="305" text-anchor="middle" font-size="8" fill="#888">시작</text>
+  <line x1="104" y1="295" x2="118" y2="295" stroke="#FF6D5A" stroke-width="1.5" marker-end="url(#arr-r)"/>
+  <rect x="120" y="278" width="54" height="34" fill="#F5A623" fill-opacity="0.2" stroke="#F5A623" stroke-width="1" rx="6"/>
+  <text x="147" y="294" text-anchor="middle" font-size="10" fill="#F5A623">🔀 IF</text>
+  <text x="147" y="305" text-anchor="middle" font-size="8" fill="#888">분기</text>
+  <line x1="176" y1="295" x2="190" y2="295" stroke="#4A9EFF" stroke-width="1.5" marker-end="url(#arr-b)"/>
+  <rect x="192" y="278" width="56" height="34" fill="#4A9EFF" fill-opacity="0.2" stroke="#4A9EFF" stroke-width="1" rx="6"/>
+  <text x="220" y="293" text-anchor="middle" font-size="10" fill="#4A9EFF">🔄 Set</text>
+  <text x="220" y="305" text-anchor="middle" font-size="8" fill="#888">변환</text>
+  <line x1="250" y1="295" x2="264" y2="295" stroke="#36B37E" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <rect x="266" y="278" width="36" height="34" fill="#36B37E" fill-opacity="0.2" stroke="#36B37E" stroke-width="1" rx="6"/>
+  <text x="284" y="298" text-anchor="middle" font-size="9" fill="#36B37E">✅</text>
+
+  <!-- Feature list -->
+  <text x="170" y="336" text-anchor="middle" font-size="11" fill="#ddd">📊 데이터 변환 · Set / Code 노드</text>
+  <text x="170" y="356" text-anchor="middle" font-size="11" fill="#ddd">🔀 조건 분기 · IF / Switch</text>
+  <text x="170" y="376" text-anchor="middle" font-size="11" fill="#ddd">🔁 루프 처리 · Loop Batches</text>
+  <text x="170" y="396" text-anchor="middle" font-size="11" fill="#ddd">🔌 400+ 인테그레이션</text>
+  <!-- Sub-example -->
+  <rect x="48" y="412" width="254" height="28" fill="#FF6D5A" fill-opacity="0.08" rx="6"/>
+  <text x="175" y="424" text-anchor="middle" font-size="9" fill="#888">예: 폼→검증→DB저장→이메일→슬랙</text>
+  <text x="175" y="435" text-anchor="middle" font-size="9" fill="#777">노드 기반 시각적 드래그&amp;드롭 설계</text>
+  <!-- Badge -->
+  <rect x="246" y="236" width="56" height="16" fill="#FF6D5A" fill-opacity="0.4" rx="4"/>
+  <text x="274" y="248" text-anchor="middle" font-size="9" fill="#ddd">CANVAS</text>
+
+  <!-- Arrow: Workflow → Center -->
+  <line x1="312" y1="370" x2="415" y2="370" stroke="#FF6D5A" stroke-width="2.5" marker-end="url(#arr-r)" stroke-dasharray="6,3"/>
+  <rect x="326" y="356" width="76" height="16" fill="#FF6D5A" fill-opacity="0.2" rx="4"/>
+  <text x="364" y="368" text-anchor="middle" font-size="9" fill="#FF6D5A">플로우 실행</text>
+
+  <!-- ============ RIGHT: API ORCHESTRATION ============ -->
+  <rect x="690" y="230" width="280" height="280" fill="#4A9EFF" fill-opacity="0.1" stroke="#4A9EFF" stroke-width="2" rx="14" filter="url(#softGlow)"/>
+  <!-- Inner header -->
+  <rect x="692" y="232" width="276" height="34" fill="#4A9EFF" fill-opacity="0.25" rx="12"/>
+  <text x="722" y="255" font-size="18" fill="#4A9EFF">②</text>
+  <text x="832" y="255" text-anchor="middle" font-size="13" font-weight="bold" fill="#4A9EFF">API Orchestration</text>
+  <!-- Badge -->
+  <rect x="900" y="236" width="60" height="16" fill="#4A9EFF" fill-opacity="0.4" rx="4"/>
+  <text x="930" y="248" text-anchor="middle" font-size="9" fill="#ddd">PARALLEL</text>
+
+  <!-- Mini API fan-out -->
+  <rect x="704" y="276" width="58" height="28" fill="#4A9EFF" fill-opacity="0.2" stroke="#4A9EFF" stroke-width="1" rx="5"/>
+  <text x="733" y="294" text-anchor="middle" font-size="9" fill="#4A9EFF">📥 Input</text>
+  <line x1="764" y1="283" x2="785" y2="275" stroke="#10A37F" stroke-width="1.2" marker-end="url(#arr-g)"/>
+  <line x1="764" y1="290" x2="785" y2="290" stroke="#FBBC05" stroke-width="1.2" marker-end="url(#arr-g)"/>
+  <line x1="764" y1="297" x2="785" y2="305" stroke="#9B59B6" stroke-width="1.2" marker-end="url(#arr-g)"/>
+  <rect x="786" y="267" width="64" height="17" fill="#10A37F" fill-opacity="0.2" stroke="#10A37F" stroke-width="1" rx="4"/>
+  <text x="818" y="279" text-anchor="middle" font-size="9" fill="#10A37F">OpenAI</text>
+  <rect x="786" y="282" width="64" height="17" fill="#FBBC05" fill-opacity="0.2" stroke="#FBBC05" stroke-width="1" rx="4"/>
+  <text x="818" y="294" text-anchor="middle" font-size="9" fill="#FBBC05">Google</text>
+  <rect x="786" y="297" width="64" height="17" fill="#9B59B6" fill-opacity="0.2" stroke="#9B59B6" stroke-width="1" rx="4"/>
+  <text x="818" y="309" text-anchor="middle" font-size="9" fill="#9B59B6">Database</text>
+  <line x1="852" y1="275" x2="870" y2="285" stroke="#F39C12" stroke-width="1.2" marker-end="url(#arr-r)"/>
+  <line x1="852" y1="290" x2="870" y2="290" stroke="#F39C12" stroke-width="1.2" marker-end="url(#arr-r)"/>
+  <line x1="852" y1="305" x2="870" y2="295" stroke="#F39C12" stroke-width="1.2" marker-end="url(#arr-r)"/>
+  <rect x="872" y="278" width="56" height="26" fill="#F39C12" fill-opacity="0.2" stroke="#F39C12" stroke-width="1" rx="5"/>
+  <text x="900" y="295" text-anchor="middle" font-size="9" fill="#F39C12">🔗 Merge</text>
+
+  <!-- Feature list -->
+  <text x="832" y="336" text-anchor="middle" font-size="11" fill="#ddd">🔑 인증 관리 · API Key / OAuth2</text>
+  <text x="832" y="356" text-anchor="middle" font-size="11" fill="#ddd">⚡ 병렬 API 동시 호출 처리</text>
+  <text x="832" y="376" text-anchor="middle" font-size="11" fill="#ddd">🔄 Rate Limit · 자동 재시도</text>
+  <text x="832" y="396" text-anchor="middle" font-size="11" fill="#ddd">📡 REST / GraphQL / Webhook</text>
+  <rect x="706" y="412" width="254" height="28" fill="#4A9EFF" fill-opacity="0.08" rx="6"/>
+  <text x="833" y="424" text-anchor="middle" font-size="9" fill="#888">예: 주문수신→[AI분석]+[재고확인]+[배송계산]</text>
+  <text x="833" y="435" text-anchor="middle" font-size="9" fill="#777">병렬 처리 후 결과 통합 → 최종 응답 반환</text>
+
+  <!-- Arrow: Center → API -->
+  <line x1="585" y1="370" x2="688" y2="370" stroke="#4A9EFF" stroke-width="2.5" marker-end="url(#arr-b)" stroke-dasharray="6,3"/>
+  <rect x="602" y="356" width="72" height="16" fill="#4A9EFF" fill-opacity="0.2" rx="4"/>
+  <text x="638" y="368" text-anchor="middle" font-size="9" fill="#4A9EFF">API 호출</text>
+
+  <!-- ============ BOTTOM: EVENT PROCESSING ============ -->
+  <rect x="350" y="466" width="300" height="196" fill="#36B37E" fill-opacity="0.1" stroke="#36B37E" stroke-width="2" rx="14" filter="url(#softGlow)"/>
+  <!-- Inner header -->
+  <rect x="352" y="468" width="296" height="34" fill="#36B37E" fill-opacity="0.25" rx="12"/>
+  <text x="390" y="491" font-size="18" fill="#36B37E">③</text>
+  <text x="500" y="491" text-anchor="middle" font-size="14" font-weight="bold" fill="#36B37E">Event Processing</text>
+  <!-- Badge -->
+  <rect x="594" y="472" width="46" height="16" fill="#36B37E" fill-opacity="0.4" rx="4"/>
+  <text x="617" y="484" text-anchor="middle" font-size="9" fill="#ddd">LIVE</text>
+
+  <!-- Event types in a row -->
+  <rect x="360" y="512" width="60" height="40" fill="#FF6D5A" fill-opacity="0.15" stroke="#FF6D5A" stroke-width="1" rx="6"/>
+  <text x="390" y="530" text-anchor="middle" font-size="9" fill="#FF6D5A">🔗</text>
+  <text x="390" y="545" text-anchor="middle" font-size="8" fill="#FF6D5A">Webhook</text>
+
+  <rect x="430" y="512" width="60" height="40" fill="#F5A623" fill-opacity="0.15" stroke="#F5A623" stroke-width="1" rx="6"/>
+  <text x="460" y="530" text-anchor="middle" font-size="9" fill="#F5A623">🔍</text>
+  <text x="460" y="545" text-anchor="middle" font-size="8" fill="#F5A623">Polling</text>
+
+  <rect x="500" y="512" width="60" height="40" fill="#9B59B6" fill-opacity="0.15" stroke="#9B59B6" stroke-width="1" rx="6"/>
+  <text x="530" y="530" text-anchor="middle" font-size="9" fill="#9B59B6">📨</text>
+  <text x="530" y="545" text-anchor="middle" font-size="8" fill="#9B59B6">MQ</text>
+
+  <rect x="570" y="512" width="68" height="40" fill="#4A9EFF" fill-opacity="0.15" stroke="#4A9EFF" stroke-width="1" rx="6"/>
+  <text x="604" y="530" text-anchor="middle" font-size="9" fill="#4A9EFF">🗄️</text>
+  <text x="604" y="545" text-anchor="middle" font-size="8" fill="#4A9EFF">DB Trigger</text>
+
+  <!-- Feature list -->
+  <text x="500" y="574" text-anchor="middle" font-size="11" fill="#ddd">⚡ 실시간 즉시 반응 (~ms)</text>
+  <text x="500" y="592" text-anchor="middle" font-size="11" fill="#ddd">📡 4가지 이벤트 소스 지원</text>
+  <rect x="360" y="604" width="278" height="28" fill="#36B37E" fill-opacity="0.08" rx="6"/>
+  <text x="499" y="616" text-anchor="middle" font-size="9" fill="#888">예: GitHub Push → 코드 배포 → Slack 알림</text>
+  <text x="499" y="628" text-anchor="middle" font-size="9" fill="#777">결제완료 이벤트 → 주문처리 → 배송 시작</text>
+
+  <!-- Arrow: Event → Center -->
+  <line x1="500" y1="464" x2="500" y2="434" stroke="#36B37E" stroke-width="2.5" marker-end="url(#arr-g)" stroke-dasharray="6,3"/>
+  <rect x="460" y="448" width="80" height="16" fill="#36B37E" fill-opacity="0.2" rx="4"/>
+  <text x="500" y="460" text-anchor="middle" font-size="9" fill="#36B37E">이벤트 발생</text>
+
+  <!-- ============ DIAGONAL CONNECTIONS (between modules) ============ -->
+  <!-- Workflow ↔ Event -->
+  <path d="M170 512 Q170 550 350 550" stroke="#666" stroke-width="1" stroke-dasharray="3,4" fill="none" stroke-opacity="0.4"/>
+  <!-- API ↔ Event -->
+  <path d="M830 512 Q830 550 650 550" stroke="#666" stroke-width="1" stroke-dasharray="3,4" fill="none" stroke-opacity="0.4"/>
+  <!-- Workflow ↔ Cron -->
+  <path d="M170 228 Q170 200 350 200" stroke="#666" stroke-width="1" stroke-dasharray="3,4" fill="none" stroke-opacity="0.4"/>
+  <!-- API ↔ Cron -->
+  <path d="M830 228 Q830 200 650 200" stroke="#666" stroke-width="1" stroke-dasharray="3,4" fill="none" stroke-opacity="0.4"/>
+
+  <!-- Legend bottom right -->
+  <rect x="820" y="550" width="160" height="95" fill="#1A1D2E" stroke="#333" stroke-width="1" rx="8"/>
+  <text x="900" y="568" text-anchor="middle" font-size="10" fill="#888" font-weight="bold">범례 · Legend</text>
+  <line x1="836" y1="582" x2="870" y2="582" stroke="#ffffff" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="912" y="586" font-size="9" fill="#888">모듈 간 연결</text>
+  <line x1="836" y1="598" x2="870" y2="598" stroke="#FF6D5A" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="912" y="602" font-size="9" fill="#888">→ n8n 엔진 트리거</text>
+  <line x1="836" y1="614" x2="870" y2="614" stroke="#4A9EFF" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="912" y="618" font-size="9" fill="#888">← n8n 엔진 실행</text>
+  <text x="900" y="634" text-anchor="middle" font-size="8" fill="#555">파일: 01~04_.svg 참고</text>
+
+  <!-- Bottom note -->
+  <text x="500" y="684" text-anchor="middle" font-size="10" fill="#444">각 구성요소 상세 구조도: 01_workflow_automation.svg · 02_api_orchestration.svg · 03_event_processing.svg · 04_cron_scheduler.svg</text>
+</svg>
