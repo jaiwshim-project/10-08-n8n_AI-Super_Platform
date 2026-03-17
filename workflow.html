@@ -97,6 +97,32 @@
   /* COPY BTN */
   .copy-success { color:#10b981; font-size:.82rem; margin-left:.5rem; }
 
+  /* FILE UPLOAD ZONE */
+  .upload-zone {
+    border:2px dashed rgba(0,212,255,.45); border-radius:14px;
+    padding:1.5rem; text-align:center; cursor:pointer;
+    transition:all .25s; margin-bottom:1rem; position:relative;
+    background:rgba(0,212,255,.04);
+  }
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color:var(--cyan); background:rgba(0,212,255,.1); transform:translateY(-2px);
+  }
+  .upload-zone input[type=file] { display:none; }
+  .upload-icon { font-size:2rem; margin-bottom:.5rem; }
+  .upload-hint { font-size:.82rem; color:var(--muted); margin-top:.3rem; }
+  .upload-hint span { color:var(--cyan); }
+  .file-list { text-align:left; margin-top:.75rem; display:flex; flex-direction:column; gap:.35rem; }
+  .file-tag { display:inline-flex; align-items:center; gap:.4rem; background:rgba(0,212,255,.1);
+    border:1px solid rgba(0,212,255,.3); border-radius:6px; padding:.3rem .7rem; font-size:.8rem; }
+  .file-tag .rm { cursor:pointer; color:var(--red); margin-left:.2rem; }
+  .ref-text-area { display:none; margin-top:.75rem; }
+  .ref-text-area.visible { display:block; }
+  .ref-label { font-size:.78rem; color:var(--cyan); margin-bottom:.3rem; font-weight:600; }
+  .ref-preview { background:rgba(5,10,25,.7); border:1px solid rgba(0,212,255,.25); border-radius:8px;
+    padding:.8rem 1rem; font-size:.8rem; line-height:1.7; max-height:180px; overflow-y:auto;
+    color:rgba(255,255,255,.85); white-space:pre-wrap; word-break:break-word; }
+  .ref-chars { font-size:.75rem; color:var(--muted); margin-top:.3rem; text-align:right; }
+
   @media(max-width:640px) {
     .form-grid { grid-template-columns:1fr; }
     .nav-links { display:none; }
@@ -143,6 +169,20 @@
         <div class="step-arrow">→</div>
         <div class="step" id="ps4">4️⃣ 완성 & 다운로드</div>
       </div>
+      <!-- 자료 업로드 영역 -->
+      <div class="upload-zone" id="pub-drop-zone" onclick="document.getElementById('pub-file-input').click()" ondragover="handleDragOver(event,'pub-drop-zone')" ondragleave="handleDragLeave('pub-drop-zone')" ondrop="handleDrop(event,'pub')">
+        <input type="file" id="pub-file-input" multiple accept=".txt,.md,.html,.csv,.json,.rtf" onchange="handleFiles(this.files,'pub')">
+        <div class="upload-icon">📂</div>
+        <div style="font-weight:600;">원고·자료 파일을 업로드하거나 여기에 드래그하세요</div>
+        <div class="upload-hint">지원: <span>.txt .md .html .csv .json .rtf</span> | 여러 파일 동시 선택 가능</div>
+        <div class="file-list" id="pub-file-list"></div>
+      </div>
+      <div class="ref-text-area" id="pub-ref-area">
+        <div class="ref-label">📄 추출된 참고 자료 (AI가 이 내용을 기반으로 집필합니다)</div>
+        <div class="ref-preview" id="pub-ref-preview"></div>
+        <div class="ref-chars" id="pub-ref-chars"></div>
+      </div>
+
       <div class="form-grid">
         <div class="field">
           <label>책 제목 / 주제</label>
@@ -358,6 +398,90 @@
 </div>
 
 <script>
+// ── 참고 자료 저장소 ────────────────────────────────
+const refData = {}; // { 'pub': { text:'...', files:[...] }, ... }
+
+// ── 파일 업로드 핸들러 ──────────────────────────────
+function handleDragOver(e, zoneId) {
+  e.preventDefault();
+  document.getElementById(zoneId).classList.add('dragover');
+}
+function handleDragLeave(zoneId) {
+  document.getElementById(zoneId).classList.remove('dragover');
+}
+function handleDrop(e, prefix) {
+  e.preventDefault();
+  document.getElementById(prefix + '-drop-zone').classList.remove('dragover');
+  handleFiles(e.dataTransfer.files, prefix);
+}
+
+function handleFiles(files, prefix) {
+  if (!files || !files.length) return;
+  if (!refData[prefix]) refData[prefix] = { text: '', files: [] };
+
+  Array.from(files).forEach(file => {
+    // 중복 방지
+    if (refData[prefix].files.find(f => f.name === file.name && f.size === file.size)) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      let content = e.target.result;
+      // HTML 파일은 태그 제거
+      if (file.name.endsWith('.html')) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = content;
+        content = tmp.innerText;
+      }
+      refData[prefix].files.push({ name: file.name, size: file.size, content: content.trim() });
+      updateRefUI(prefix);
+    };
+    reader.readAsText(file, 'UTF-8');
+  });
+}
+
+function removeFile(prefix, idx) {
+  refData[prefix].files.splice(idx, 1);
+  updateRefUI(prefix);
+}
+
+function updateRefUI(prefix) {
+  const files = refData[prefix]?.files || [];
+  const listEl = document.getElementById(prefix + '-file-list');
+  const refArea = document.getElementById(prefix + '-ref-area');
+  const preview = document.getElementById(prefix + '-ref-preview');
+  const chars   = document.getElementById(prefix + '-ref-chars');
+
+  // 파일 태그 목록
+  listEl.innerHTML = files.map((f, i) =>
+    `<div class="file-tag">📄 ${f.name} <span style="color:var(--muted)">(${(f.size/1024).toFixed(1)}KB)</span>
+      <span class="rm" onclick="event.stopPropagation();removeFile('${prefix}',${i})">✕</span></div>`
+  ).join('');
+
+  // 통합 텍스트
+  const combined = files.map((f,i) =>
+    `=== 파일 ${i+1}: ${f.name} ===\n${f.content}`
+  ).join('\n\n');
+  refData[prefix].text = combined;
+
+  if (combined.length > 0) {
+    refArea.classList.add('visible');
+    const MAX_PREVIEW = 800;
+    preview.textContent = combined.length > MAX_PREVIEW
+      ? combined.substring(0, MAX_PREVIEW) + '\n\n...(이하 생략)...'
+      : combined;
+    const totalChars = combined.length;
+    const warn = totalChars > 50000 ? ' ⚠️ 너무 많으면 앞 50,000자만 사용' : '';
+    chars.textContent = `총 ${totalChars.toLocaleString()}자${warn}`;
+  } else {
+    refArea.classList.remove('visible');
+  }
+}
+
+function getRefText(prefix, maxChars = 50000) {
+  const txt = refData[prefix]?.text || '';
+  return txt.length > maxChars ? txt.substring(0, maxChars) + '\n\n[...자료 일부 생략...]' : txt;
+}
+
 // ── API KEY ──────────────────────────────────────────
 let API_KEY = localStorage.getItem('gemini_api_key') || '';
 if (!API_KEY) {
@@ -436,6 +560,11 @@ async function runPublish() {
   setStatus('pub-status', '📋 AI가 목차를 작성하고 있습니다...');
   setProgress('pub-progress', 20);
 
+  const refText = getRefText('pub');
+  const refBlock = refText
+    ? `\n\n[업로드된 참고 자료 — 이 내용을 반드시 목차 구성에 반영하세요]\n${refText}\n[참고 자료 끝]`
+    : '';
+
   const prompt = `당신은 전문 출판 편집자입니다.
 아래 조건으로 전자책 목차를 작성하세요.
 
@@ -443,7 +572,7 @@ async function runPublish() {
 대상 독자: ${target || '일반 독자'}
 책 유형: ${type}
 핵심 키워드: ${keywords || '없음'}
-챕터 수: ${chCount}개
+챕터 수: ${chCount}개${refBlock}
 
 다음 형식으로 정확히 작성하세요:
 CHAPTER 1: [챕터 제목]
@@ -486,6 +615,12 @@ async function runChapters() {
     .filter(l => l.match(/CHAPTER\s*\d+/i))
     .map(l => l.replace(/CHAPTER\s*\d+:\s*/i,'').trim());
 
+  // 참고 자료는 전체 챕터에서 공유 (첫 챕터에만 넣으면 토큰 절약, 여기서는 전체 반영)
+  const refText = getRefText('pub', 30000); // 챕터별 최대 3만자
+  const refBlock = refText
+    ? `\n\n[참고 자료 — 실제 내용을 참고하여 구체적으로 작성하세요]\n${refText}\n[참고 자료 끝]\n`
+    : '';
+
   for (let i = 0; i < chCount; i++) {
     const chapTitle = chapterTitles[i] || `챕터 ${i+1}`;
     const pct = Math.round(((i+1)/chCount)*100);
@@ -495,8 +630,9 @@ async function runChapters() {
     const prompt = `당신은 "${pubData.title}" 책의 전문 저자입니다.
 대상 독자: ${pubData.target || '일반 독자'}
 책 유형: ${pubData.type}
-
+${refBlock}
 다음 챕터를 1,500자 내외로 작성하세요.
+참고 자료가 있다면 그 내용을 기반으로 구체적 사례와 수치를 활용하세요.
 
 챕터 제목: ${chapTitle}
 
@@ -571,6 +707,9 @@ function copyBook() {
 
 function resetPublish() {
   pubData = {};
+  refData['pub'] = { text: '', files: [] };
+  document.getElementById('pub-file-list').innerHTML = '';
+  document.getElementById('pub-ref-area').classList.remove('visible');
   ['pub-toc-box','pub-chapters-box','pub-final-box'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
